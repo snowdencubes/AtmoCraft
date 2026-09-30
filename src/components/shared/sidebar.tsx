@@ -43,7 +43,7 @@ const TRAINER_ITEMS = [
 const ADMIN_ITEMS = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "User Management", href: "/admin/users", icon: Users },
-  { name: "Approvals", href: "/admin/approvals", icon: UserCheck },
+  { name: "Approvals", href: "/admin/users?filter=pending", icon: UserCheck },
   { name: "Courses", href: "/admin/courses", icon: BookOpen },
   { name: "Content Manager", href: "/admin/content", icon: Megaphone },
 ];
