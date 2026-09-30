@@ -23,6 +23,12 @@ ENV NODE_ENV=production
 # Render passes environment variables at runtime, but Next.js needs them at build time if they are NEXT_PUBLIC_
 # To handle this dynamically without baking secrets into the image, Next.js handles runtime envs automatically
 # if they are used server-side, but client-side NEXT_PUBLIC_ variables must be present during build.
+# We must declare ARGs here so Docker picks them up from Render during the build phase.
+ARG NEXT_PUBLIC_SUPABASE_URL
+ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
+ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
+ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
+
 # For Docker deployments on Render, we just run the build.
 RUN npm run build
 
