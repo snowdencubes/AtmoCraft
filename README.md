@@ -189,7 +189,15 @@ npm run lint
 - [Architecture Blueprint](./docs/ARCHITECTURE.md)
 - [Data Model & Schema](./docs/DATA_MODEL.md)
 - [Service Layer API](./docs/SERVICES.md)
-- [Business Assumptions](./docs/ASSUMPTIONS.md) *(Notes on passing marks, retries, etc.)*
+- [Business Assumptions](./docs/ASSUMPTIONS.md)
+- [Resource Policy](./docs/RESOURCE_POLICY.md)
+- [Resource Verification Report](./docs/RESOURCE_VERIFICATION.md)
+- [Resource Credits](./docs/RESOURCE_CREDITS.md)
+
+## 📚 Resource Library & Data Pipeline
+The platform includes an automated data pipeline to validate, verify, and import open-access educational resources for meteorological training.
+- **Pipeline Scripts:** Located in `scripts/resources/`. Run `node scripts/resources/validate.js` followed by `node scripts/resources/verify-links.js` to process new raw JSON data.
+- **Licensing:** The pipeline strictly enforces redistribution licenses. Only files explicitly permitting redistribution are considered for local mirroring. See `docs/RESOURCE_CREDITS.md` for full attributions.
 - [SIH Presentation Demo Script](./docs/DEMO_SCRIPT.md)
 
 ---
