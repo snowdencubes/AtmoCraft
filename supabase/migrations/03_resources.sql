@@ -134,8 +134,8 @@ CREATE POLICY "Users can insert own views" ON public.resource_views FOR INSERT W
 
 -- GIN Indexes for Full-Text Search
 ALTER TABLE public.resources ADD COLUMN fts tsvector GENERATED ALWAYS AS (
-    setweight(to_tsvector('english', coalesce(title, '')), 'A') ||
-    setweight(to_tsvector('english', coalesce(summary, '')), 'B') ||
-    setweight(to_tsvector('english', coalesce(array_to_string(sub_topics, ' '), '')), 'C')
+    setweight(to_tsvector('english'::regconfig, coalesce(title, '')), 'A') ||
+    setweight(to_tsvector('english'::regconfig, coalesce(summary, '')), 'B') ||
+    setweight(to_tsvector('english'::regconfig, coalesce(array_to_string(sub_topics, ' '), '')), 'C')
 ) STORED;
 CREATE INDEX resources_fts_idx ON public.resources USING GIN (fts);
