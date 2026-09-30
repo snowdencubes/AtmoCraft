@@ -79,7 +79,7 @@ export function TopBar({ onMenuClick, collapsed }: TopBarProps) {
             onClick={() => setShowDropdown(!showDropdown)}
             className="flex items-center gap-2 rounded-full border p-1 pr-3 hover:bg-[var(--color-surface-raised)] focus-ring"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-primary-light)] text-white">
+            <div className="flex h-8 w-8 items-center justify-center bg-[var(--color-primary-light)] text-white shadow-[0_0_10px_rgba(0,0,0,0.5)] [clip-path:polygon(50%_0%,_100%_25%,_100%_75%,_50%_100%,_0%_75%,_0%_25%)]">
               {currentUser?.name.charAt(0) || "U"}
             </div>
             <span className="hidden text-sm font-medium sm:block">

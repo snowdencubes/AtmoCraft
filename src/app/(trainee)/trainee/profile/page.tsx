@@ -21,7 +21,7 @@ export default function TraineeProfile() {
         <div className="col-span-1 flex flex-col gap-6">
           <div className="rounded-2xl border bg-[var(--color-surface-card)] p-6 shadow-sm">
             <div className="flex flex-col items-center text-center">
-              <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-[var(--color-primary-light)] text-3xl font-bold text-white">
+              <div className="mb-4 flex h-24 w-24 items-center justify-center bg-[var(--color-primary-light)] text-3xl font-bold text-white shadow-[0_0_20px_rgba(0,0,0,0.5)] [clip-path:polygon(50%_0%,_100%_25%,_100%_75%,_50%_100%,_0%_75%,_0%_25%)] hover:scale-105 transition-transform duration-300">
                 {currentUser?.name.charAt(0) || "U"}
               </div>
               <h2 className="font-heading text-xl font-bold">{currentUser?.name}</h2>
