@@ -25,7 +25,7 @@ export const authService = {
     };
 
     // Storing password is mocked here, normally we'd extend the user or have another table
-    (newUser as any)._passwordHash = hashedPassword;
+    (newUser as any).password_hash = hashedPassword;
 
     return await usersRepo.create(newUser);
   },
@@ -39,8 +39,8 @@ export const authService = {
 
     // Since mock users might not have _passwordHash, we'll allow any password for them if they are active
     // For newly created users, we check the hash
-    if ((user as any)._passwordHash) {
-      const isValid = await verifyPassword(password, (user as any)._passwordHash);
+    if ((user as any).password_hash) {
+      const isValid = await verifyPassword(password, (user as any).password_hash);
       if (!isValid) {
         throw new Error('Invalid email or password');
       }
