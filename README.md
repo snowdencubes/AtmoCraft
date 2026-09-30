@@ -25,7 +25,7 @@
 
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=wave&color=1e3a5f&height=80&section=header" alt="Wave Divider" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=1e3a5f&height=80&section=header" alt="Wave Divider" width="100%" />
 
 ---
 

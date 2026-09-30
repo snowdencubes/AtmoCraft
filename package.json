@@ -1,12 +1,13 @@
 {
   "name": "atmocraft",
-  "version": "0.1.0",
+  "version": "2.1.1",
   "private": true,
   "license": "MIT",
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
+    "start:with-alive": "python scripts/keep_alive.py & next start",
     "lint": "eslint"
   },
   "dependencies": {
