@@ -7,6 +7,7 @@ import { Announcement, CertificationRecord, Course } from "@/lib/types";
 import { getAnnouncements, getCertifications, getCourses } from "@/lib/services";
 import { SkeletonCard, SkeletonLine } from "@/components/shared/skeleton";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/shared/logo";
 
 export default function HomePage() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
@@ -35,9 +36,7 @@ export default function HomePage() {
       <header className="sticky top-0 z-50 border-b border-[var(--color-primary-light)]/20 bg-[var(--color-primary)] text-white shadow-sm backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 font-bold backdrop-blur">
-              <span className="text-[var(--color-secondary)]">IMD</span>
-            </div>
+            <Logo className="h-10 w-10" />
             <div>
               <h1 className="font-heading text-xl font-bold leading-none tracking-tight">AtmoCraft</h1>
               <p className="text-[10px] font-medium text-white/70">Ministry of Earth Sciences</p>
@@ -274,7 +273,7 @@ export default function HomePage() {
           <div className="grid gap-8 md:grid-cols-3">
             <div>
               <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded bg-[var(--color-secondary)] font-bold text-white">CC</div>
+                <Logo className="h-8 w-8" />
                 <span className="font-heading text-lg font-bold">AtmoCraft</span>
               </div>
               <p className="mt-4 text-sm text-white/70">

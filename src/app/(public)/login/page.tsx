@@ -7,6 +7,7 @@ import { useAuthStore } from "@/store/auth-store";
 import { useToast } from "@/components/shared/toast";
 import { Loader2, Mail, Lock } from "lucide-react";
 import { mockUsers } from "@/lib/mock";
+import { Logo } from "@/components/shared/logo";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -48,9 +49,7 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-[var(--color-surface)] p-4">
       <div className="w-full max-w-md overflow-hidden rounded-2xl border bg-[var(--color-surface-card)] shadow-xl animate-slide-up">
         <div className="bg-[var(--color-primary)] p-8 text-center text-white">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 font-bold backdrop-blur-sm">
-            <span className="text-2xl text-[var(--color-secondary)]">CC</span>
-          </div>
+          <Logo className="mx-auto mb-4 h-16 w-16" />
           <h1 className="font-heading text-2xl font-bold">AtmoCraft</h1>
           <p className="mt-2 text-sm text-white/80">Sign in to your account</p>
         </div>

@@ -8,8 +8,15 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
 
 export const metadata: Metadata = {
-  title: "AtmoCraft | IMD Learning Portal",
-  description: "Empowering IMD professionals through digital learning and capacity building",
+  title: {
+    template: "%s | AtmoCraft",
+    default: "AtmoCraft | IMD Learning Portal",
+  },
+  description: "Official Digital Capacity Building & LMS Portal for the India Meteorological Department.",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#1e3a5f" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0f1a" },
+  ],
 };
 
 export default function RootLayout({

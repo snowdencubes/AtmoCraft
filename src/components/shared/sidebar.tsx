@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Role } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/shared/logo";
 import {
   LayoutDashboard,
   UserCircle,
@@ -64,9 +65,7 @@ export function Sidebar({ role, collapsed }: SidebarProps) {
     >
       <div className="flex h-16 items-center justify-center border-b border-[var(--color-primary-light)] px-4">
         <Link href="/" className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
-          <div className="flex h-8 w-8 items-center justify-center rounded bg-[var(--color-secondary)] font-bold">
-            CC
-          </div>
+          <Logo className="h-8 w-8 shrink-0" />
           {!collapsed && (
             <span className="font-heading text-lg font-bold">AtmoCraft</span>
           )}
