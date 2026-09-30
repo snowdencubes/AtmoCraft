@@ -10,7 +10,8 @@ export async function generateStaticParams() {
   return resources.map((r: any) => ({ slug: r.slug }));
 }
 
-export default async function ResourceDetailPage({ params }: { params: { slug: string } }) {
+export default async function ResourceDetailPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const resource = await getResourceBySlug(params.slug);
 
   if (!resource) {
