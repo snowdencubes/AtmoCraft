@@ -5,8 +5,14 @@ import { useParams, useRouter } from "next/navigation";
 import { PageHeader } from "@/components/shared/page-header";
 import { assessmentService } from "@/lib/services/assessmentService";
 import { Assessment, Attempt, CertificationRecord, Question } from "@/lib/types";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+const Button = ({ variant = 'default', className = '', ...props }: any) => (
+  <button className={`flex items-center justify-center px-4 py-2 rounded-lg font-bold transition-colors focus-ring disabled:opacity-50 ${variant === 'outline' ? 'border border-[var(--color-outline)] hover:bg-[var(--color-surface-raised)]' : 'bg-[var(--color-primary)] text-white hover:opacity-90'} ${className}`} {...props} />
+);
+const Card = ({ className = '', ...props }: any) => <div className={`rounded-xl border bg-[var(--color-surface-card)] shadow-sm ${className}`} {...props} />;
+const CardHeader = ({ className = '', ...props }: any) => <div className={`p-6 border-b border-[var(--color-outline)] ${className}`} {...props} />;
+const CardTitle = ({ className = '', ...props }: any) => <h3 className={`font-heading text-lg font-bold text-[var(--color-on-surface)] ${className}`} {...props} />;
+const CardContent = ({ className = '', ...props }: any) => <div className={`p-6 ${className}`} {...props} />;
+const CardFooter = ({ className = '', ...props }: any) => <div className={`p-6 border-t border-[var(--color-outline)] flex items-center ${className}`} {...props} />;
 import { CheckCircle2, XCircle, Award, ArrowLeft, ArrowRight, Download, Check } from "lucide-react";
 
 function ResultView({
