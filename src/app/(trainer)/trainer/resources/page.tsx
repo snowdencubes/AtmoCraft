@@ -59,7 +59,7 @@ export default function TrainerResources() {
     try {
       const fileId = crypto.randomUUID();
       // Save the actual file data to IDB
-      await saveFile(fileId, fileToUpload);
+      await saveFile('library', fileId, fileToUpload);
       
       const newResource: Resource = {
         id: crypto.randomUUID(),
@@ -90,7 +90,7 @@ export default function TrainerResources() {
 
   const handleDelete = async (resourceId: string, fileKey: string) => {
     await resourcesRepo.delete(resourceId);
-    await deleteFile(fileKey);
+    await deleteFile('library', fileKey);
     setResources(prev => prev.filter(r => r.id !== resourceId));
   };
 

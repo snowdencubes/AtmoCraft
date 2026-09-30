@@ -109,7 +109,7 @@ export function ProfileForm({ onProgressUpdate }: { onProgressUpdate: (progress:
     if (!file) return;
 
     const fileId = crypto.randomUUID();
-    await saveFile(fileId, file);
+    await saveFile('certificates', fileId, file);
     
     appendCert({
       id: crypto.randomUUID(),
@@ -123,7 +123,7 @@ export function ProfileForm({ onProgressUpdate }: { onProgressUpdate: (progress:
   };
 
   const handleDownload = async (fileId: string, fileName: string) => {
-    const file = await getFile(fileId);
+    const file = await getFile('certificates', fileId);
     if (!file) return;
 
     let url: string;
@@ -312,7 +312,7 @@ export function ProfileForm({ onProgressUpdate }: { onProgressUpdate: (progress:
               <button 
                 type="button" 
                 onClick={async () => {
-                  await deleteFile(field.file);
+                  await deleteFile('certificates', field.file);
                   removeCert(index);
                   form.handleSubmit(onSubmit as any)();
                 }} 

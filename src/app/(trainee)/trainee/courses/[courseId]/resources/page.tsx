@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/auth-store";
 import { getCourseById, getResourcesByCourse, markResourceViewed } from "@/lib/services";
+import { getFileUrl } from "@/lib/db/files";
 import { courseService } from "@/lib/services/courseService";
 import { Course, Resource } from "@/lib/types";
 import { PageHeader } from "@/components/shared/page-header";
@@ -19,6 +20,7 @@ export default function ResourcesPage({ params }: { params: Promise<{ courseId: 
   const [resources, setResources] = useState<Resource[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeResource, setActiveResource] = useState<Resource | null>(null);
+  const [activeResourceUrl, setActiveResourceUrl] = useState<string | null>(null);
 
   useEffect(() => {
     async function load() {
@@ -55,10 +57,29 @@ export default function ResourcesPage({ params }: { params: Promise<{ courseId: 
 
   const handleOpenResource = async (resource: Resource) => {
     setActiveResource(resource);
+    setActiveResourceUrl(null); // Reset while loading
+    
+    // Fetch Signed URL
+    const url = await getFileUrl('library', resource.url);
+    setActiveResourceUrl(url);
+
     if (currentUser) {
       const resolvedParams = await params;
       await markResourceViewed(resolvedParams.courseId, currentUser.id, resource.id);
     }
+  };
+  
+  const handleDownload = async (resource: Resource) => {
+    const url = await getFileUrl('library', resource.url);
+    if (!url) return;
+    const a = document.createElement('a');
+    a.href = url;
+    // Set target blank to open in new tab if download doesn't trigger automatically
+    a.target = '_blank';
+    a.download = resource.title;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   };
 
   const getResourceIcon = (type: string) => {
@@ -111,7 +132,9 @@ export default function ResourcesPage({ params }: { params: Promise<{ courseId: 
                 >
                   View
                 </button>
-                <button className="flex items-center justify-center rounded-lg border border-[var(--color-outline)] p-2 text-[var(--color-on-surface-muted)] hover:bg-[var(--color-surface-raised)] focus-ring">
+                <button 
+                  onClick={() => handleDownload(resource)}
+                  className="flex items-center justify-center rounded-lg border border-[var(--color-outline)] p-2 text-[var(--color-on-surface-muted)] hover:bg-[var(--color-surface-raised)] focus-ring">
                   <Download className="h-4 w-4" />
                 </button>
               </div>
@@ -140,39 +163,28 @@ export default function ResourcesPage({ params }: { params: Promise<{ courseId: 
               </button>
             </div>
             
-            <div className="flex-1 overflow-auto bg-[var(--color-surface-raised)] p-6 md:p-12 flex items-center justify-center min-h-[50vh]">
-              {activeResource.type === 'video' && (
-                <div className="aspect-video w-full bg-black rounded-lg flex items-center justify-center shadow-inner relative overflow-hidden group">
-                  <PlayCircle className="h-16 w-16 text-white/50 group-hover:text-white/80 transition-colors" />
-                  <div className="absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
-                    <div className="w-full h-1 bg-white/30 rounded-full overflow-hidden">
-                      <div className="w-1/3 h-full bg-[var(--color-primary)]"></div>
-                    </div>
-                  </div>
+            <div className="flex-1 overflow-hidden bg-[var(--color-surface-raised)] p-0 flex items-center justify-center min-h-[50vh]">
+              {!activeResourceUrl ? (
+                <div className="flex flex-col items-center justify-center gap-4 text-[var(--color-on-surface-muted)] p-12">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-primary)]"></div>
+                  <p>Loading secure file URL...</p>
                 </div>
-              )}
-              {activeResource.type === 'pdf' && (
-                <div className="w-full max-w-2xl bg-white shadow-lg flex flex-col gap-8 p-8 md:p-16 h-[60vh] overflow-y-auto">
-                  <div className="h-8 w-3/4 bg-gray-200 rounded animate-pulse"></div>
-                  <div className="space-y-4">
-                    <div className="h-4 w-full bg-gray-100 rounded"></div>
-                    <div className="h-4 w-full bg-gray-100 rounded"></div>
-                    <div className="h-4 w-5/6 bg-gray-100 rounded"></div>
-                    <div className="h-4 w-full bg-gray-100 rounded"></div>
-                  </div>
-                  <div className="h-32 w-full bg-gray-100 rounded mt-8"></div>
-                </div>
-              )}
-              {activeResource.type === 'slides' && (
-                <div className="aspect-[4/3] w-full max-w-3xl bg-white rounded-lg shadow-lg flex flex-col p-8 items-center justify-center text-center">
-                  <h1 className="text-3xl font-bold mb-4">{activeResource.title}</h1>
-                  <p className="text-xl text-gray-500">IMD Training Program</p>
-                  <div className="mt-12 flex gap-2">
-                    <div className="h-2 w-8 rounded-full bg-[var(--color-primary)]"></div>
-                    <div className="h-2 w-2 rounded-full bg-gray-200"></div>
-                    <div className="h-2 w-2 rounded-full bg-gray-200"></div>
-                    <div className="h-2 w-2 rounded-full bg-gray-200"></div>
-                  </div>
+              ) : (
+                <div className="w-full h-full min-h-[60vh] flex items-center justify-center bg-black/5">
+                  {activeResource.type === 'video' ? (
+                    <video 
+                      src={activeResourceUrl} 
+                      controls 
+                      className="w-full max-h-[80vh] bg-black shadow-2xl"
+                      autoPlay
+                    />
+                  ) : (
+                    <iframe 
+                      src={activeResourceUrl} 
+                      className="w-full h-[80vh] border-0 bg-white"
+                      title={activeResource.title}
+                    />
+                  )}
                 </div>
               )}
             </div>
