@@ -3,6 +3,8 @@ import { KPICard } from "@/components/shared/kpi-card";
 import { Users, BookOpen, GraduationCap, Activity } from "lucide-react";
 import { usersRepo, coursesRepo, enrollmentsRepo } from "@/lib/db/repos";
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminDashboardPage() {
   const users = await usersRepo.findAll();
   const courses = await coursesRepo.findAll();
