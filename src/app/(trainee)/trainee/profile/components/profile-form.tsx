@@ -119,7 +119,7 @@ export function ProfileForm({ onProgressUpdate }: { onProgressUpdate: (progress:
     });
     
     // Auto-save form to trigger percentage update
-    form.handleSubmit(onSubmit)();
+    form.handleSubmit(onSubmit as any)();
   };
 
   const handleDownload = async (fileId: string, fileName: string) => {
@@ -164,7 +164,7 @@ export function ProfileForm({ onProgressUpdate }: { onProgressUpdate: (progress:
   if (loading) return <div>Loading profile...</div>;
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+    <form onSubmit={form.handleSubmit(onSubmit as any)} className="space-y-8">
       
       {/* QUALIFICATIONS */}
       <div className="space-y-4">
@@ -314,7 +314,7 @@ export function ProfileForm({ onProgressUpdate }: { onProgressUpdate: (progress:
                 onClick={async () => {
                   await deleteFile(field.file);
                   removeCert(index);
-                  form.handleSubmit(onSubmit)();
+                  form.handleSubmit(onSubmit as any)();
                 }} 
                 className="absolute top-2 right-2 text-red-500 hover:text-red-700"
               >

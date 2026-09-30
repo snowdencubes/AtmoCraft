@@ -42,7 +42,7 @@ function createRepo<T extends HasId>(tableName: string) {
     update: async (id: string, data: Partial<T>): Promise<T | undefined> => {
       const { data: updated, error } = await supabase
         .from(tableName)
-        .update(data)
+        .update(data as any)
         .eq('id', id)
         .select()
         .single();

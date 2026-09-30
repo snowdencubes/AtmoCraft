@@ -46,7 +46,7 @@ export const enrollInCourse = async (courseId: string, userId: string): Promise<
     progress: 0,
     viewedResources: [],
     enrolledAt: new Date().toISOString()
-  } as Enrollment);
+  } as any as Enrollment);
   return true;
 };
 
