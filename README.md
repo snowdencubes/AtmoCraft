@@ -157,7 +157,7 @@ AtmoCraft/
 ```bash
 # Clone the repository
 git clone https://github.com/snowdencubes/AtmoCraft.git
-cd boxy
+cd AtmoCraft
 
 # Install dependencies (use --no-bin-links for Android/Termux environments)
 npm install
