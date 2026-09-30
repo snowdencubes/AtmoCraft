@@ -10,7 +10,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { PlayCircle, FileText, Monitor, Download, X } from "lucide-react";
 import { useToast } from "@/components/shared/toast";
 
-export default function ResourcesPage({ params }: { params: { courseId: string } }) {
+export default function ResourcesPage({ params }: { params: Promise<{ courseId: string }> }) {
   const router = useRouter();
   const { currentUser } = useAuthStore();
   const { addToast } = useToast();
@@ -28,15 +28,17 @@ export default function ResourcesPage({ params }: { params: { courseId: string }
       }
 
       try {
+        const resolvedParams = await params;
+        const courseId = resolvedParams.courseId;
         const [cData, rData, enrollment] = await Promise.all([
-          getCourseById(params.courseId),
-          getResourcesByCourse(params.courseId),
-          courseService.getEnrollment(currentUser.id, params.courseId)
+          getCourseById(courseId),
+          getResourcesByCourse(courseId),
+          courseService.getEnrollment(currentUser.id, courseId)
         ]);
 
         if (!cData || !enrollment) {
           addToast({ title: "Access Denied", description: "You are not enrolled in this course.", type: "error" });
-          router.push(`/trainee/courses/${params.courseId}`);
+          router.push(`/trainee/courses/${courseId}`);
           return;
         }
 
@@ -49,12 +51,13 @@ export default function ResourcesPage({ params }: { params: { courseId: string }
       }
     }
     load();
-  }, [params.courseId, currentUser, router, addToast]);
+  }, [params, currentUser, router, addToast]);
 
   const handleOpenResource = async (resource: Resource) => {
     setActiveResource(resource);
     if (currentUser) {
-      await markResourceViewed(params.courseId, currentUser.id, resource.id);
+      const resolvedParams = await params;
+      await markResourceViewed(resolvedParams.courseId, currentUser.id, resource.id);
     }
   };
 

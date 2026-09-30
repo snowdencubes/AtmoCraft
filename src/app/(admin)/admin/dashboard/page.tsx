@@ -9,8 +9,8 @@ export default async function AdminDashboardPage() {
   const enrollments = await enrollmentsRepo.findAll();
 
   const activeUsers = users.filter(u => u.status === "active").length;
-  const activeCourses = courses.filter(c => c.status === "published").length;
-  const completedEnrollments = enrollments.filter(e => e.status === "completed").length;
+  const activeCourses = courses.length;
+  const completedEnrollments = enrollments.filter(e => e.progress === 100).length;
   
   const completionRate = enrollments.length > 0 
     ? Math.round((completedEnrollments / enrollments.length) * 100) 
@@ -20,7 +20,7 @@ export default async function AdminDashboardPage() {
     <div className="space-y-6">
       <PageHeader 
         title="Admin Dashboard" 
-        description="Platform-wide KPIs and metrics overview."
+        subtitle="Platform-wide KPIs and metrics overview."
       />
       
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

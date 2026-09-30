@@ -13,7 +13,7 @@ import { getFeedback, saveFeedback } from "@/lib/services";
 import Link from "next/link";
 import { MessageSquare } from "lucide-react";
 
-export default function CourseDetailsPage({ params }: { params: { courseId: string } }) {
+export default function CourseDetailsPage({ params }: { params: Promise<{ courseId: string }> }) {
   const router = useRouter();
   const { currentUser } = useAuthStore();
   const { addToast } = useToast();
@@ -32,16 +32,20 @@ export default function CourseDetailsPage({ params }: { params: { courseId: stri
   useEffect(() => {
     async function load() {
       try {
-        const data = await courseService.getCourseById(params.courseId);
+        const resolvedParams = await params;
+        const courseId = resolvedParams.courseId;
+        const data = await courseService.getCourseById(courseId);
         if (data) {
           setCourse(data);
           
           if (currentUser && currentUser.role === 'trainee') {
-            const enrollment = await courseService.getEnrollment(currentUser.id, params.courseId);
+            const resolvedParams = await params;
+            const courseId = resolvedParams.courseId;
+            const enrollment = await courseService.getEnrollment(currentUser.id, courseId);
             setIsEnrolled(!!enrollment);
             
             // Load existing feedback
-            const existingFeedback = await getFeedback(params.courseId);
+            const existingFeedback = await getFeedback(courseId);
             const userFeedback = existingFeedback.find(f => f.userId === currentUser.id);
             if (userFeedback) {
               setFeedbackText(userFeedback.comment);
@@ -57,20 +61,22 @@ export default function CourseDetailsPage({ params }: { params: { courseId: stri
       }
     }
     load();
-  }, [params.courseId, currentUser]);
+  }, [params, currentUser]);
 
   const handleEnrollment = async () => {
     if (!currentUser || currentUser.role !== 'trainee') return;
     
     setEnrolling(true);
     try {
+      const resolvedParams = await params;
+      const courseId = resolvedParams.courseId;
       if (isEnrolled) {
-        await courseService.unenroll(currentUser.id, params.courseId);
+        await courseService.unenroll(currentUser.id, courseId);
         setIsEnrolled(false);
         addToast({ title: "Unenrolled", description: `You have successfully unenrolled from ${course?.title}`, type: "success" });
         if (course) setCourse({ ...course, enrolled: Math.max(0, course.enrolled - 1) });
       } else {
-        await courseService.enroll(currentUser.id, params.courseId);
+        await courseService.enroll(currentUser.id, courseId);
         setIsEnrolled(true);
         addToast({ title: "Enrolled", description: `You have successfully enrolled in ${course?.title}`, type: "success" });
         if (course) setCourse({ ...course, enrolled: course.enrolled + 1 });
@@ -87,9 +93,11 @@ export default function CourseDetailsPage({ params }: { params: { courseId: stri
     if (!currentUser) return;
     setSubmittingFeedback(true);
     try {
+      const resolvedParams = await params;
       await saveFeedback({
-        courseId: params.courseId,
+        courseId: resolvedParams.courseId,
         userId: currentUser.id,
+        userName: currentUser.name || "Student",
         rating,
         comment: feedbackText
       });

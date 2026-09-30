@@ -52,7 +52,7 @@ export function ProfileForm({ onProgressUpdate }: { onProgressUpdate: (progress:
   const [newSkill, setNewSkill] = useState("");
 
   const form = useForm<ProfileFormValues>({
-    resolver: zodResolver(profileFormSchema),
+    resolver: zodResolver(profileFormSchema) as any,
     defaultValues: {
       qualifications: [],
       workExperience: [],
