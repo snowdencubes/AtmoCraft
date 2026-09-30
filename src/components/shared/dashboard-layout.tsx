@@ -8,6 +8,7 @@ import { Sidebar } from "./sidebar";
 import { TopBar } from "./top-bar";
 import { MobileNav } from "./mobile-nav";
 import { DemoPanel } from "./demo-panel";
+import { CommandPalette } from "./command-palette";
 import { cn } from "@/lib/utils";
 
 interface DashboardLayoutProps {
@@ -54,6 +55,7 @@ export function DashboardLayout({ children, requiredRole }: DashboardLayoutProps
       </main>
 
       <MobileNav role={role} />
+      <CommandPalette />
       <DemoPanel />
     </div>
   );

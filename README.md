@@ -99,6 +99,7 @@ boxy/
 ## 📖 Documentation
 
 For detailed technical insights, please refer to our `docs/` folder:
+- [Architecture Blueprint](./docs/ARCHITECTURE.md)
 - [Data Model & Schema](./docs/DATA_MODEL.md)
 - [Service Layer API](./docs/SERVICES.md)
 - [Business Assumptions](./docs/ASSUMPTIONS.md)
@@ -108,6 +109,6 @@ For detailed technical insights, please refer to our `docs/` folder:
 
 ## 🤝 Contribution Guidelines
 
-All contributions for SIH26075 should be pushed through authorized accounts. Ensure you follow the strict TypeScript guidelines and run `npm run lint` before committing.
+Please read our comprehensive [Contributing Guide](./docs/CONTRIBUTING.md) before making any PRs. All contributions for SIH26075 should be pushed through authorized accounts. Ensure you follow the strict TypeScript guidelines and run `npm run lint` before committing.
 
 *Built with ❤️ for the Ministry of Earth Sciences, Govt. of India.*
