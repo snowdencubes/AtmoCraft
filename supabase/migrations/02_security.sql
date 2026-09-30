@@ -65,17 +65,31 @@ INSERT INTO storage.buckets (id, name, public) VALUES ('certificates', 'certific
 INSERT INTO storage.buckets (id, name, public) VALUES ('library', 'library', false) ON CONFLICT DO NOTHING;
 
 -- 5. Storage RLS Policies (Apply to storage.objects)
+DROP POLICY IF EXISTS "Avatars are publicly accessible" ON storage.objects;
 CREATE POLICY "Avatars are publicly accessible" ON storage.objects FOR SELECT USING (bucket_id = 'avatars');
+
+DROP POLICY IF EXISTS "Users can upload their own avatars" ON storage.objects;
 CREATE POLICY "Users can upload their own avatars" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'avatars' AND auth.uid()::text = (storage.foldername(name))[1]);
+
+DROP POLICY IF EXISTS "Users can update their own avatars" ON storage.objects;
 CREATE POLICY "Users can update their own avatars" ON storage.objects FOR UPDATE USING (bucket_id = 'avatars' AND auth.uid()::text = (storage.foldername(name))[1]);
 
+DROP POLICY IF EXISTS "Course covers are publicly accessible" ON storage.objects;
 CREATE POLICY "Course covers are publicly accessible" ON storage.objects FOR SELECT USING (bucket_id = 'course-covers');
+
+DROP POLICY IF EXISTS "Trainers/Admins can upload course covers" ON storage.objects;
 CREATE POLICY "Trainers/Admins can upload course covers" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'course-covers' AND public.current_user_role() IN ('trainer', 'admin'));
 
+DROP POLICY IF EXISTS "Users can read own certificates" ON storage.objects;
 CREATE POLICY "Users can read own certificates" ON storage.objects FOR SELECT USING (bucket_id = 'certificates' AND auth.uid()::text = (storage.foldername(name))[1]);
+
+DROP POLICY IF EXISTS "Trainers/Admins can manage certificates" ON storage.objects;
 CREATE POLICY "Trainers/Admins can manage certificates" ON storage.objects FOR ALL USING (bucket_id = 'certificates' AND public.current_user_role() IN ('trainer', 'admin'));
 
+DROP POLICY IF EXISTS "Library files readable by authenticated" ON storage.objects;
 CREATE POLICY "Library files readable by authenticated" ON storage.objects FOR SELECT USING (bucket_id = 'library' AND auth.uid() IS NOT NULL);
+
+DROP POLICY IF EXISTS "Trainers can manage library" ON storage.objects;
 CREATE POLICY "Trainers can manage library" ON storage.objects FOR ALL USING (bucket_id = 'library' AND public.current_user_role() IN ('trainer', 'admin'));
 
 

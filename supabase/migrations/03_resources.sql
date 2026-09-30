@@ -1,5 +1,6 @@
 -- Stage 5: Resources Schema
 -- Create resource providers table
+DROP TABLE IF EXISTS public.resource_providers CASCADE;
 CREATE TABLE public.resource_providers (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name TEXT NOT NULL,
@@ -13,6 +14,7 @@ CREATE TABLE public.resource_providers (
 );
 
 -- Create resources table
+DROP TABLE IF EXISTS public.resources CASCADE;
 CREATE TABLE public.resources (
     id TEXT PRIMARY KEY,
     slug TEXT UNIQUE NOT NULL,
