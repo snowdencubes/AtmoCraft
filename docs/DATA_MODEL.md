@@ -1,6 +1,6 @@
 # Data Model
 
-This document outlines the database schema for Capacity Connect. It details the tables, their columns, data types, relationships, and Row Level Security (RLS) rules.
+This document outlines the database schema for AtmoCraft. It details the tables, their columns, data types, relationships, and Row Level Security (RLS) rules.
 
 ## Core Tables
 

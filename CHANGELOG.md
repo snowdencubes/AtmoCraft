@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2026-09-30
 
 ### Added
-- Complete initial prototype of the Capacity Connect portal.
+- Complete initial prototype of the AtmoCraft portal.
 - Role-based Dashboard experiences (Trainee, Trainer, Admin).
 - In-memory mock database with `zustand/middleware` persist store.
 - Local indexed file storage via `idb-keyval` for resources and certificates.

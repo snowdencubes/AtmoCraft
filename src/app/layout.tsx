@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
 
 export const metadata: Metadata = {
-  title: "Capacity Connect | IMD Learning Portal",
+  title: "AtmoCraft | IMD Learning Portal",
   description: "Empowering IMD professionals through digital learning and capacity building",
 };
 

@@ -4,7 +4,7 @@ export async function GET() {
   return NextResponse.json(
     {
       status: 'ok',
-      message: 'Capacity Connect is running optimally.',
+      message: 'AtmoCraft is running optimally.',
       timestamp: new Date().toISOString(),
     },
     { status: 200 }

@@ -1,10 +1,10 @@
 # SIH Presentation Demo Script (5 Minutes)
 
-This script outlines the click-by-click journey for demonstrating Capacity Connect during the SIH presentation.
+This script outlines the click-by-click journey for demonstrating AtmoCraft during the SIH presentation.
 
 ## Demo Accounts
-- **Admin:** `admin@capacityconnect.com` / `Password123!`
-- **Learner:** `learner@capacityconnect.com` / `Password123!`
+- **Admin:** `admin@atmocraft.com` / `Password123!`
+- **Learner:** `learner@atmocraft.com` / `Password123!`
 
 ---
 
@@ -14,7 +14,7 @@ This script outlines the click-by-click journey for demonstrating Capacity Conne
 
 1. **Login (0:00 - 0:15)**
    - Open the app.
-   - Login as `learner@capacityconnect.com`.
+   - Login as `learner@atmocraft.com`.
    - *Talking point:* "We land on the Learner Dashboard, designed to be clean, distraction-free, and mobile-responsive."
 
 2. **Dashboard & Progress (0:15 - 0:45)**
@@ -44,7 +44,7 @@ This script outlines the click-by-click journey for demonstrating Capacity Conne
 
 1. **Switch Accounts (2:30 - 2:45)**
    - Log out.
-   - Log in as `admin@capacityconnect.com`.
+   - Log in as `admin@atmocraft.com`.
    - *Talking point:* "The Admin portal provides bird's-eye visibility and content control."
 
 2. **Analytics Dashboard (2:45 - 3:30)**
@@ -68,4 +68,4 @@ This script outlines the click-by-click journey for demonstrating Capacity Conne
 
 5. **Conclusion (4:45 - 5:00)**
    - Return to Admin Dashboard.
-   - Conclude: "Capacity Connect bridges the gap between organizational needs and individual growth, all in one seamless platform."
+   - Conclude: "AtmoCraft bridges the gap between organizational needs and individual growth, all in one seamless platform."

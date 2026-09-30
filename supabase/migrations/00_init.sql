@@ -1,4 +1,4 @@
--- Capacity Connect - Initial Schema Migration
+-- AtmoCraft - Initial Schema Migration
 
 -- This schema matches the types defined in src/lib/types.ts to ensure
 -- a 1-to-1 mapping when using Supabase data fetching.

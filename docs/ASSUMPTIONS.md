@@ -1,6 +1,6 @@
 # Business Rules & Assumptions
 
-This document lists the core assumptions and business logic rules that drive the implementation of Capacity Connect. Any deviation from these rules would require architectural or logic updates.
+This document lists the core assumptions and business logic rules that drive the implementation of AtmoCraft. Any deviation from these rules would require architectural or logic updates.
 
 ## 1. Assessments & Attempts
 - **One Attempt by Default:** Unless specifically reset by an administrator, a learner is permitted only **one attempt** per assessment.

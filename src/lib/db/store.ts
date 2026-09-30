@@ -88,7 +88,7 @@ export const useDbStore = create<DbState>()(
       setTable: (table, data) => set((state) => ({ ...state, [table]: data })),
     }),
     {
-      name: 'capacity-connect-demo-v1',
+      name: 'atmocraft-demo-v1',
     }
   )
 );

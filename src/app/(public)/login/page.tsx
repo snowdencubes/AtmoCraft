@@ -28,7 +28,7 @@ export default function LoginPage() {
       
       addToast({
         title: "Login successful",
-        description: "Welcome back to Capacity Connect",
+        description: "Welcome back to AtmoCraft",
         type: "success"
       });
       
@@ -51,7 +51,7 @@ export default function LoginPage() {
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 font-bold backdrop-blur-sm">
             <span className="text-2xl text-[var(--color-secondary)]">CC</span>
           </div>
-          <h1 className="font-heading text-2xl font-bold">Capacity Connect</h1>
+          <h1 className="font-heading text-2xl font-bold">AtmoCraft</h1>
           <p className="mt-2 text-sm text-white/80">Sign in to your account</p>
         </div>
 

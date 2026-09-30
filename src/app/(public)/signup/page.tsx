@@ -53,7 +53,7 @@ export default function SignupPage() {
             <span className="text-2xl text-[var(--color-secondary)]">CC</span>
           </div>
           <h1 className="font-heading text-2xl font-bold">Create Account</h1>
-          <p className="mt-2 text-sm text-white/80">Join Capacity Connect today</p>
+          <p className="mt-2 text-sm text-white/80">Join AtmoCraft today</p>
         </div>
 
         <div className="p-8">

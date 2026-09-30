@@ -1,4 +1,4 @@
-// Demo seed data for Capacity Connect - SIH26075
+// Demo seed data for AtmoCraft - SIH26075
 // Mock questionnaires for the IMD Learning Portal
 
 import { Questionnaire } from '@/lib/types';

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/banner.svg" alt="Capacity Connect Animated Banner" width="100%" />
+<img src="./assets/banner.svg" alt="AtmoCraft Animated Banner" width="100%" />
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Inter&weight=500&size=20&duration=3000&pause=1000&color=5B9BD5&center=true&vCenter=true&repeat=true&width=500&lines=Role-based+learning+portal;MCQ+assessments+and+certificates;Built+for+SIH+2026;India+Meteorological+Department)](https://git.io/typing-svg)
 
@@ -31,7 +31,7 @@
 
 ## 🎯 About the project
 
-Capacity Connect is a centralized, state-of-the-art web portal designed exclusively for the personnel of the India Meteorological Department (IMD) to solve problem statement **SIH26075**.
+AtmoCraft is a centralized, state-of-the-art web portal designed exclusively for the personnel of the India Meteorological Department (IMD) to solve problem statement **SIH26075**.
 
 It transforms how IMD staff train, share knowledge, and build competencies by transitioning from scattered offline documents to a rich, interactive, and trackable digital learning ecosystem. Because continuous learning matters when you're predicting the weather and keeping the nation safe.
 
@@ -260,5 +260,5 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
   <br/>
   <i>If you like this project, <a href="https://github.com/snowdencubes/boxy">give it a star ⭐️</a></i>
   <br/>
-  <a href="#-capacity-connect">⬆️ Back to Top</a>
+  <a href="#-atmocraft">⬆️ Back to Top</a>
 </div>

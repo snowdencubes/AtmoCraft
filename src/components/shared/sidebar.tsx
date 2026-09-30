@@ -68,7 +68,7 @@ export function Sidebar({ role, collapsed }: SidebarProps) {
             CC
           </div>
           {!collapsed && (
-            <span className="font-heading text-lg font-bold">Capacity Connect</span>
+            <span className="font-heading text-lg font-bold">AtmoCraft</span>
           )}
         </Link>
       </div>

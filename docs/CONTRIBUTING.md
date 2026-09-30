@@ -1,6 +1,6 @@
-# Contributing to Capacity Connect
+# Contributing to AtmoCraft
 
-First off, thank you for considering contributing to Capacity Connect! This project aims to revolutionize digital capacity building for the India Meteorological Department (IMD) as part of SIH26075.
+First off, thank you for considering contributing to AtmoCraft! This project aims to revolutionize digital capacity building for the India Meteorological Department (IMD) as part of SIH26075.
 
 ## 🚀 Quick Start
 

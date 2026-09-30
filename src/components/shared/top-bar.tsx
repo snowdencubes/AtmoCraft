@@ -35,7 +35,7 @@ export function TopBar({ onMenuClick, collapsed }: TopBarProps) {
         </button>
         {/* Mobile menu button (always shows sidebar/bottom nav conceptually, but here we just need a visual toggle or logo) */}
         <div className="md:hidden font-heading font-bold text-[var(--color-primary)]">
-          Capacity Connect
+          AtmoCraft
         </div>
 
         <div className="hidden items-center gap-2 rounded-full border bg-[var(--color-surface)] px-3 py-1.5 focus-within:ring-2 focus-within:ring-[var(--color-secondary)] md:flex">

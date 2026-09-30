@@ -1,4 +1,4 @@
-// Capacity Connect - Type Definitions
+// AtmoCraft - Type Definitions
 // SIH26075 - India Meteorological Department
 
 export type Role = 'trainee' | 'trainer' | 'admin';

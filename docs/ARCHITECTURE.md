@@ -1,10 +1,10 @@
-# 🏗️ Capacity Connect - Architecture Blueprint
+# 🏗️ AtmoCraft - Architecture Blueprint
 
-This document outlines the high-level architecture and technical design decisions behind Capacity Connect, ensuring a scalable, secure, and maintainable platform for the India Meteorological Department (IMD).
+This document outlines the high-level architecture and technical design decisions behind AtmoCraft, ensuring a scalable, secure, and maintainable platform for the India Meteorological Department (IMD).
 
 ## 1. System Architecture
 
-Capacity Connect follows a modern, decoupled architecture designed for high performance and seamless scalability.
+AtmoCraft follows a modern, decoupled architecture designed for high performance and seamless scalability.
 
 ```mermaid
 graph TD
@@ -58,7 +58,7 @@ sequenceDiagram
 
 ## 4. Security & Role-Based Access Control (RBAC)
 
-Security is paramount for government applications. Capacity Connect implements a multi-layered security model:
+Security is paramount for government applications. AtmoCraft implements a multi-layered security model:
 
 1. **Route Guards (Frontend):** The `DashboardLayout` component inspects the `auth-store` session. If a Trainee attempts to access `/admin/dashboard`, they are immediately redirected.
 2. **Service Layer Guards (Frontend):** Functions in `src/lib/services/*` verify the active session token/role before executing business logic.

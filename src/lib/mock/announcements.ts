@@ -1,4 +1,4 @@
-// Demo seed data for Capacity Connect - SIH26075
+// Demo seed data for AtmoCraft - SIH26075
 // Mock announcements for the IMD Learning Portal
 
 import { Announcement } from '@/lib/types';
@@ -52,7 +52,7 @@ export const mockAnnouncements: Announcement[] = [
   {
     id: 'ann-6',
     title: 'System Maintenance Downtime',
-    content: 'Capacity Connect will undergo scheduled maintenance this Sunday between 02:00 AM and 04:00 AM IST. Please plan your learning activities accordingly.',
+    content: 'AtmoCraft will undergo scheduled maintenance this Sunday between 02:00 AM and 04:00 AM IST. Please plan your learning activities accordingly.',
     type: 'notification',
     pinned: false,
     published: true,

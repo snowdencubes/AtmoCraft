@@ -1,6 +1,6 @@
 # Services Documentation
 
-This document describes the core service layer of the Capacity Connect application, including inputs, outputs, and the database tables they interact with. These services encapsulate the business logic and coordinate data fetching/mutating via the Supabase client.
+This document describes the core service layer of the AtmoCraft application, including inputs, outputs, and the database tables they interact with. These services encapsulate the business logic and coordinate data fetching/mutating via the Supabase client.
 
 ## `UserService`
 Manages user profiles and permissions.

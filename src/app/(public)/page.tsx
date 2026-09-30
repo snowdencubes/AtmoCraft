@@ -39,7 +39,7 @@ export default function HomePage() {
               <span className="text-[var(--color-secondary)]">IMD</span>
             </div>
             <div>
-              <h1 className="font-heading text-xl font-bold leading-none tracking-tight">Capacity Connect</h1>
+              <h1 className="font-heading text-xl font-bold leading-none tracking-tight">AtmoCraft</h1>
               <p className="text-[10px] font-medium text-white/70">Ministry of Earth Sciences</p>
             </div>
           </div>
@@ -275,7 +275,7 @@ export default function HomePage() {
             <div>
               <div className="flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded bg-[var(--color-secondary)] font-bold text-white">CC</div>
-                <span className="font-heading text-lg font-bold">Capacity Connect</span>
+                <span className="font-heading text-lg font-bold">AtmoCraft</span>
               </div>
               <p className="mt-4 text-sm text-white/70">
                 A digital learning and capacity building platform exclusively for the personnel of the India Meteorological Department.

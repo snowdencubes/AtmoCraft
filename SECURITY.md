@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Currently, Capacity Connect is heavily under development for the Smart India Hackathon 2026. Only the `main` branch is receiving updates. 
+Currently, AtmoCraft is heavily under development for the Smart India Hackathon 2026. Only the `main` branch is receiving updates. 
 
 | Version | Supported          |
 | ------- | ------------------ |

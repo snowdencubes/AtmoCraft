@@ -62,7 +62,7 @@ export const assessmentService = {
         userId: authUser.id,
         userName: authUser.name,
         courseId: assessment.courseId,
-        courseName: course?.title || assessment.subject || 'Capacity Connect Course',
+        courseName: course?.title || assessment.subject || 'AtmoCraft Course',
         issuedAt: new Date().toISOString(),
       };
       await certificationRecordsRepo.create(certificate);
