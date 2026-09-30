@@ -8,9 +8,13 @@ import {
   LayoutDashboard,
   UserCircle,
   BookOpen,
+  ClipboardCheck,
   Search,
   Library,
+  FileQuestion,
+  BarChart3,
   Users,
+  UserCheck,
   Megaphone,
 } from "lucide-react";
 
@@ -19,22 +23,24 @@ interface MobileNavProps {
 }
 
 const TRAINEE_ITEMS = [
-  { name: "Home", href: "/trainee/dashboard", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/trainee/dashboard", icon: LayoutDashboard },
   { name: "Courses", href: "/trainee/courses", icon: BookOpen },
-  { name: "Search", href: "/trainee/trainer-finder", icon: Search },
+  { name: "Assessments", href: "/trainee/assessments", icon: ClipboardCheck },
   { name: "Profile", href: "/trainee/profile", icon: UserCircle },
 ];
 
 const TRAINER_ITEMS = [
-  { name: "Home", href: "/trainer/dashboard", icon: LayoutDashboard },
-  { name: "Library", href: "/trainer/library", icon: Library },
+  { name: "Dashboard", href: "/trainer/dashboard", icon: LayoutDashboard },
+  { name: "Resources", href: "/trainer/resources", icon: Library },
+  { name: "Assessments", href: "/trainer/assessments", icon: FileQuestion },
   { name: "Profile", href: "/trainer/profile", icon: UserCircle },
 ];
 
 const ADMIN_ITEMS = [
-  { name: "Home", href: "/admin/dashboard", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Users", href: "/admin/users", icon: Users },
-  { name: "Content", href: "/admin/content", icon: Megaphone },
+  { name: "Courses", href: "/admin/courses", icon: BookOpen },
+  { name: "Approvals", href: "/admin/approvals", icon: UserCheck },
 ];
 
 export function MobileNav({ role }: MobileNavProps) {
@@ -45,23 +51,27 @@ export function MobileNav({ role }: MobileNavProps) {
   if (role === "admin") items = ADMIN_ITEMS;
 
   return (
-    <nav className="fixed bottom-0 left-0 z-40 flex h-16 w-full border-t bg-[var(--color-surface-card)] pb-safe shadow-[0_-2px_10px_rgba(0,0,0,0.05)] md:hidden">
-      {items.map((item) => {
-        const isActive = pathname.startsWith(item.href);
-        return (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={cn(
-              "flex flex-1 flex-col items-center justify-center gap-1 transition-colors",
-              isActive ? "text-[var(--color-primary)]" : "text-[var(--color-on-surface-muted)] hover:text-[var(--color-on-surface)]"
-            )}
-          >
-            <item.icon className={cn("h-5 w-5", isActive && "fill-[var(--color-primary-light)]/20")} />
-            <span className="text-[10px] font-medium">{item.name}</span>
-          </Link>
-        );
-      })}
-    </nav>
+    <div className="fixed bottom-0 left-0 z-40 w-full border-t border-[var(--color-border)] bg-[var(--color-surface)] md:hidden">
+      <nav className="flex h-16 items-center justify-around px-2">
+        {items.map((item) => {
+          const isActive = pathname.startsWith(item.href);
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "flex flex-col items-center justify-center gap-1 rounded-lg px-3 py-2 transition-colors",
+                isActive
+                  ? "text-[var(--color-primary)]"
+                  : "text-[var(--color-on-surface-muted)] hover:text-[var(--color-on-surface)]"
+              )}
+            >
+              <item.icon className={cn("h-5 w-5", isActive && "text-[var(--color-primary)]")} />
+              <span className="text-[10px] font-medium">{item.name}</span>
+            </Link>
+          );
+        })}
+      </nav>
+    </div>
   );
 }

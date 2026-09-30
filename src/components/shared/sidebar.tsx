@@ -34,8 +34,8 @@ const TRAINEE_ITEMS = [
 const TRAINER_ITEMS = [
   { name: "Dashboard", href: "/trainer/dashboard", icon: LayoutDashboard },
   { name: "My Profile", href: "/trainer/profile", icon: UserCircle },
-  { name: "My Library", href: "/trainer/library", icon: Library },
-  { name: "Questionnaires", href: "/trainer/questionnaires", icon: FileQuestion },
+  { name: "Resource Library", href: "/trainer/resources", icon: Library },
+  { name: "Assessments", href: "/trainer/assessments", icon: FileQuestion },
   { name: "Performance", href: "/trainer/performance", icon: BarChart3 },
 ];
 
