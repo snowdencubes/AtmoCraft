@@ -34,12 +34,12 @@ CREATE POLICY "Users can read own data" ON users FOR SELECT USING (id = auth.uid
 CREATE POLICY "Admins can manage all users" ON users FOR ALL USING (public.current_user_role() = 'admin');
 
 -- Profiles: Users manage own profile (except role/status, handled by API), Admins manage all
-CREATE POLICY "Users can manage own profile" ON profiles FOR ALL USING (userId = auth.uid());
+CREATE POLICY "Users can manage own profile" ON profiles FOR ALL USING ("userId" = auth.uid());
 CREATE POLICY "Admins can manage all profiles" ON profiles FOR ALL USING (public.current_user_role() = 'admin');
 
 -- Courses: Anyone can read published courses, Trainers manage own, Admins manage all
 CREATE POLICY "Anyone can read published courses" ON courses FOR SELECT USING (status = 'published');
-CREATE POLICY "Trainers can manage own courses" ON courses FOR ALL USING (trainerId = auth.uid() AND public.current_user_role() = 'trainer');
+CREATE POLICY "Trainers can manage own courses" ON courses FOR ALL USING ("trainerId" = auth.uid() AND public.current_user_role() = 'trainer');
 CREATE POLICY "Admins can manage all courses" ON courses FOR ALL USING (public.current_user_role() = 'admin');
 
 -- 4. Storage Buckets Creation
