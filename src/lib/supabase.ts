@@ -1,7 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient as createBrowserClient } from '@/lib/supabase/client';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-// Client for public/anon access
-export const supabase = createClient(supabaseUrl, supabaseKey);
+// Client for public/anon access and authenticated client components
+// This automatically picks up the session from cookies in the browser.
+export const supabase = createBrowserClient();
