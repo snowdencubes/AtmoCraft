@@ -4,13 +4,13 @@
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Inter&weight=500&size=20&duration=3000&pause=1000&color=5B9BD5&center=true&vCenter=true&repeat=true&width=500&lines=Role-based+learning+portal;MCQ+assessments+and+certificates;Built+for+SIH+2026;India+Meteorological+Department)](https://git.io/typing-svg)
 
-![GitHub License](https://img.shields.io/github/license/snowdencubes/boxy?style=flat-square&color=1e3a5f)
+![GitHub License](https://img.shields.io/github/license/snowdencubes/AtmoCraft?style=flat-square&color=1e3a5f)
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
 ![Tailwind](https://img.shields.io/badge/Tailwind-v4-38B2AC?style=flat-square&logo=tailwind-css)
 ![Supabase](https://img.shields.io/badge/Supabase-Planned-green?style=flat-square&logo=supabase)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/snowdencubes/boxy?style=flat-square&color=e8943a)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/snowdencubes/AtmoCraft?style=flat-square&color=e8943a)
 
 <br/>
 
@@ -131,7 +131,7 @@ graph TD
 ## 📂 Project Structure
 
 ```text
-boxy/
+AtmoCraft/
 ├── src/
 │   ├── app/                 # Next.js App Router (Grouped by Roles)
 │   ├── components/          # Shared UI (Command Palette, Cards, Layouts)
@@ -156,7 +156,7 @@ boxy/
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/snowdencubes/boxy.git
+git clone https://github.com/snowdencubes/AtmoCraft.git
 cd boxy
 
 # Install dependencies (use --no-bin-links for Android/Termux environments)
@@ -223,8 +223,8 @@ We welcome contributions! Please review our [Contributing Guide](./docs/CONTRIBU
   <p><a href="mailto:krishkumarcodes@gmail.com">Contact Me</a></p>
   
   <br/>
-  <a href="https://github.com/snowdencubes/boxy/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=snowdencubes/boxy" alt="Contributors" />
+  <a href="https://github.com/snowdencubes/AtmoCraft/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=snowdencubes/AtmoCraft" alt="Contributors" />
   </a>
 </div>
 
@@ -233,11 +233,11 @@ We welcome contributions! Please review our [Contributing Guide](./docs/CONTRIBU
 ## 📈 Star History
 
 <div align="center">
-  <a href="https://star-history.com/#snowdencubes/boxy&Date">
+  <a href="https://star-history.com/#snowdencubes/AtmoCraft&Date">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=snowdencubes/boxy&type=Date&theme=dark" />
-      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=snowdencubes/boxy&type=Date" />
-      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=snowdencubes/boxy&type=Date" />
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=snowdencubes/AtmoCraft&type=Date&theme=dark" />
+      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=snowdencubes/AtmoCraft&type=Date" />
+      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=snowdencubes/AtmoCraft&type=Date" />
     </picture>
   </a>
 </div>
@@ -258,7 +258,7 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=1e3a5f&height=40&section=footer" alt="Wave Footer" width="100%" />
   <br/>
-  <i>If you like this project, <a href="https://github.com/snowdencubes/boxy">give it a star ⭐️</a></i>
+  <i>If you like this project, <a href="https://github.com/snowdencubes/AtmoCraft">give it a star ⭐️</a></i>
   <br/>
   <a href="#-atmocraft">⬆️ Back to Top</a>
 </div>
