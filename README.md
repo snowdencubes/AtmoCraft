@@ -199,10 +199,10 @@ npm run lint
 - [x] Trainee Flows (Enrollment, Resources, Assessments)
 - [x] Trainer Flows (Libraries, Questionnaires)
 - [x] Local DB to Supabase SQL Migration Scripts written
-- [ ] Connect Authentication to Supabase Auth
-- [ ] Connect File Uploads to Supabase Storage buckets
-- [ ] Email notifications
-- [ ] Hindi / Regional language support
+- [x] Connect Authentication to Supabase Auth
+- [x] Connect File Uploads to Supabase Storage buckets
+- [x] Email notifications
+- [x] Hindi / Regional language support
 
 ---
 

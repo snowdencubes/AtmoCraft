@@ -9,6 +9,7 @@ import { getAnnouncements, getCertifications, getCourses } from "@/lib/services"
 import { SkeletonCard, SkeletonLine } from "@/components/shared/skeleton";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/shared/logo";
+import { LanguageSwitcher } from "@/components/shared/language-switcher";
 
 export default function HomePage() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
@@ -44,6 +45,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="flex items-center gap-4">
+            <LanguageSwitcher />
             <Link href="/login" className="hidden text-sm font-medium hover:text-[var(--color-secondary)] sm:block">
               Sign In
             </Link>

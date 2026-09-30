@@ -1,6 +1,7 @@
 import { usersRepo } from '@/lib/db/repos';
 import { hashPassword, verifyPassword } from '@/lib/auth-crypto';
 import { User } from '@/lib/types';
+import { emailService } from '@/lib/services/emailService';
 
 export const authService = {
   async signup(data: any) {
@@ -27,7 +28,12 @@ export const authService = {
     // Storing password is mocked here, normally we'd extend the user or have another table
     (newUser as any).password_hash = hashedPassword;
 
-    return await usersRepo.create(newUser);
+    const createdUser = await usersRepo.create(newUser);
+    
+    // Trigger welcome email notification
+    await emailService.sendWelcomeEmail(createdUser.email, createdUser.name).catch(console.error);
+    
+    return createdUser;
   },
 
   async login(email: string, password: string): Promise<User> {
@@ -60,8 +66,9 @@ export const authService = {
   async approveUser(id: string) {
     const user = await usersRepo.update(id, { status: 'active' });
     if (user) {
-      // Logic to create notification could go here
+      // Create notification & send email
       console.log(`Notification: Account approved for ${user.name}`);
+      await emailService.sendApprovalEmail(user.email, user.name).catch(console.error);
     }
     return user;
   },

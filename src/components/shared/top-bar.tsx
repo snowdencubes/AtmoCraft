@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import { useAuthStore } from "@/store/auth-store";
 import { cn } from "@/lib/utils";
 import { Menu, Search, Bell, Sun, Moon, LogOut, User } from "lucide-react";
+import { LanguageSwitcher } from "./language-switcher";
 
 interface TopBarProps {
   onMenuClick: () => void;
@@ -52,6 +53,10 @@ export function TopBar({ onMenuClick, collapsed }: TopBarProps) {
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4">
+        <div className="hidden sm:block">
+          <LanguageSwitcher />
+        </div>
+        
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="rounded-full p-2 hover:bg-[var(--color-surface-raised)] focus-ring"
