@@ -73,6 +73,7 @@ export interface Enrollment {
   courseId: string;
   userId: string;
   progress: number;
+  viewedResources?: string[];
   enrolledAt: string;
   completedAt?: string;
 }

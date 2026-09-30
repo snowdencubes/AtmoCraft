@@ -1,0 +1,140 @@
+--- src/app/(trainee)/trainee/courses/[courseId]/page.tsx
++++ src/app/(trainee)/trainee/courses/[courseId]/page.tsx
+@@ -4,8 +4,11 @@
+ import { useRouter } from "next/navigation";
+ import { PageHeader } from "@/components/shared/page-header";
+ import { Clock, Users, Star, BookOpen, User, CheckCircle, List } from "lucide-react";
+-import { Course } from "@/lib/types";
++import { Course, Feedback } from "@/lib/types";
+ import { courseService } from "@/lib/services/courseService";
++import { getFeedback, saveFeedback } from "@/lib/services";
++import Link from "next/link";
+ import { useAuthStore } from "@/store/auth-store";
+ import { cn } from "@/lib/utils";
+ import { useToast } from "@/components/shared/toast";
+ 
+@@ -20,6 +23,9 @@
+   const [loading, setLoading] = useState(true);
+   const [isEnrolled, setIsEnrolled] = useState(false);
+   const [enrolling, setEnrolling] = useState(false);
++  const [feedback, setFeedback] = useState<Feedback | null>(null);
++  const [rating, setRating] = useState<number>(0);
++  const [comment, setComment] = useState("");
++  const [savingFeedback, setSavingFeedback] = useState(false);
+ 
+   useEffect(() => {
+     async function load() {
+@@ -31,6 +37,13 @@
+           if (currentUser && currentUser.role === 'trainee') {
+             const enrollment = await courseService.getEnrollment(currentUser.id, params.courseId);
+             setIsEnrolled(!!enrollment);
++            
++            const fList = await getFeedback(params.courseId);
++            const userFeedback = fList.find(f => f.userId === currentUser.id);
++            if (userFeedback) {
++              setFeedback(userFeedback);
++              setRating(userFeedback.rating);
++              setComment(userFeedback.comment);
++            }
+           }
+         }
+       } catch (err) {
+@@ -64,6 +77,20 @@
+       setEnrolling(false);
+     }
+   };
++
++  const handleSaveFeedback = async () => {
++    if (!currentUser || !course || rating === 0) return;
++    setSavingFeedback(true);
++    const saved = await saveFeedback({
++      courseId: course.id,
++      userId: currentUser.id,
++      userName: currentUser.name,
++      rating,
++      comment
++    });
++    setFeedback(saved);
++    setSavingFeedback(false);
++    addToast({ title: "Feedback Saved", description: "Thank you for your feedback!", type: "success" });
++  };
+ 
+   if (loading) {
+@@ -125,6 +152,43 @@
+               <p className="text-sm text-[var(--color-on-surface-muted)] italic">Syllabus not available.</p>
+             )}
+           </div>
++
++          {isEnrolled && (
++            <div className="rounded-xl border bg-[var(--color-surface-card)] p-6 shadow-sm">
++              <h3 className="font-heading text-lg font-bold mb-4 text-[var(--color-on-surface)] flex items-center gap-2">
++                <Star className="h-5 w-5 text-yellow-500" />
++                Your Feedback
++              </h3>
++              <div className="flex flex-col gap-4">
++                <div>
++                  <label className="mb-1 block text-sm font-medium">Rating</label>
++                  <div className="flex gap-1">
++                    {[1, 2, 3, 4, 5].map((star) => (
++                      <button
++                        key={star}
++                        onClick={() => setRating(star)}
++                        className={`p-1 ${rating >= star ? 'text-yellow-500' : 'text-[var(--color-outline)]'}`}
++                      >
++                        <Star className="h-6 w-6 fill-current" />
++                      </button>
++                    ))}
++                  </div>
++                </div>
++                <div>
++                  <label className="mb-1 block text-sm font-medium">Comment</label>
++                  <textarea
++                    value={comment}
++                    onChange={(e) => setComment(e.target.value)}
++                    className="w-full rounded-lg border bg-[var(--color-surface)] border-[var(--color-outline)] p-3 text-sm focus-ring outline-none"
++                    rows={3}
++                    placeholder="Share your thoughts about this course..."
++                  />
++                </div>
++                <div>
++                  <button 
++                    onClick={handleSaveFeedback}
++                    disabled={savingFeedback || rating === 0}
++                    className="rounded-lg bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90 disabled:opacity-50 focus-ring"
++                  >
++                    {savingFeedback ? "Saving..." : feedback ? "Update Feedback" : "Submit Feedback"}
++                  </button>
++                </div>
++              </div>
++            </div>
++          )}
+         </div>
+ 
+         {/* Sidebar */}
+@@ -171,6 +235,12 @@
+ 
+             <div className="pt-2 border-t border-[var(--color-outline)]">
+               {currentUser?.role === 'trainee' ? (
++                <div className="flex flex-col gap-3">
++                  {isEnrolled && (
++                    <Link href={`/trainee/courses/${course.id}/resources`} className="w-full text-center rounded-lg bg-[var(--color-secondary)] py-3 text-sm font-bold text-white transition-colors hover:opacity-90 focus-ring mt-2">
++                      Open Resources
++                    </Link>
++                  )}
+                   <button 
+                     onClick={handleEnrollment}
+                     disabled={enrolling}
+@@ -178,11 +248,12 @@
+-                    "w-full rounded-lg py-3 text-sm font-bold transition-colors focus-ring mt-2",
++                    "w-full rounded-lg py-3 text-sm font-bold transition-colors focus-ring",
+                     isEnrolled 
+                       ? "bg-[var(--color-error)]/10 text-[var(--color-error)] hover:bg-[var(--color-error)]/20"
+                       : "bg-[var(--color-primary)] text-white hover:opacity-90",
+                     enrolling && "opacity-50 cursor-not-allowed"
+                   )}
+                   >
+                     {enrolling ? "Processing..." : isEnrolled ? "Unenroll" : "Enroll Now"}
+                   </button>
++                </div>
+               ) : (
+                 <div className="bg-[var(--color-surface-raised)] p-3 rounded text-sm text-center text-[var(--color-on-surface-muted)]">

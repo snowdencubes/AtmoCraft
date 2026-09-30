@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/store/auth-store";
-import { getEnrollments, getCourses, getAnnouncements } from "@/lib/services";
-import { Course, Enrollment, Announcement } from "@/lib/types";
+import { getAnnouncements } from "@/lib/services";
+import { courseService } from "@/lib/services/courseService";
+import { Course, Announcement } from "@/lib/types";
 import { KPICard } from "@/components/shared/kpi-card";
 import { PageHeader } from "@/components/shared/page-header";
 import { SkeletonCard, SkeletonKPI, SkeletonLine } from "@/components/shared/skeleton";
@@ -13,31 +14,28 @@ import { cn } from "@/lib/utils";
 
 export default function TraineeDashboard() {
   const { currentUser } = useAuthStore();
-  const [enrollments, setEnrollments] = useState<Enrollment[]>([]);
-  const [courses, setCourses] = useState<Course[]>([]);
+  const [enrolledCourses, setEnrolledCourses] = useState<(Course & { progress: number })[]>([]);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
       if (!currentUser) return;
-      const [eData, cData, aData] = await Promise.all([
-        getEnrollments(currentUser.id),
-        getCourses(),
+      const [coursesData, aData] = await Promise.all([
+        courseService.getEnrolledCourses(currentUser.id),
         getAnnouncements()
       ]);
-      setEnrollments(eData);
-      setCourses(cData);
+      setEnrolledCourses(coursesData);
       setAnnouncements(aData.filter(a => a.type === 'notification' || a.type === 'announcement').slice(0, 3));
       setLoading(false);
     }
     loadData();
   }, [currentUser]);
 
-  const ongoingCount = enrollments.filter(e => e.progress < 100).length;
-  const completedCount = enrollments.filter(e => e.progress === 100).length;
-  const avgProgress = enrollments.length > 0 
-    ? Math.round(enrollments.reduce((acc, curr) => acc + curr.progress, 0) / enrollments.length) 
+  const ongoingCount = enrolledCourses.filter(c => c.progress < 100).length;
+  const completedCount = enrolledCourses.filter(c => c.progress === 100).length;
+  const avgProgress = enrolledCourses.length > 0 
+    ? Math.round(enrolledCourses.reduce((acc, curr) => acc + curr.progress, 0) / enrolledCourses.length) 
     : 0;
 
   return (
@@ -76,16 +74,13 @@ export default function TraineeDashboard() {
             <div className="flex flex-col gap-4">
               {loading ? (
                 Array(2).fill(0).map((_, i) => <SkeletonCard key={i} />)
-              ) : enrollments.length === 0 ? (
+              ) : enrolledCourses.length === 0 ? (
                 <div className="rounded-xl border border-dashed p-8 text-center text-[var(--color-on-surface-muted)]">
                   You haven't enrolled in any courses yet.
                 </div>
               ) : (
-                enrollments.filter(e => e.progress < 100).map(enrollment => {
-                  const course = courses.find(c => c.id === enrollment.courseId);
-                  if (!course) return null;
-                  return (
-                    <div key={enrollment.id} className="group flex flex-col gap-4 rounded-xl border bg-[var(--color-surface-card)] p-5 shadow-sm transition-shadow hover:shadow-md sm:flex-row sm:items-center">
+                enrolledCourses.filter(c => c.progress < 100).map(course => (
+                    <div key={course.id} className="group flex flex-col gap-4 rounded-xl border bg-[var(--color-surface-card)] p-5 shadow-sm transition-shadow hover:shadow-md sm:flex-row sm:items-center">
                       <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-[var(--color-primary-light)]/10 text-[var(--color-primary)]">
                         <BookOpen className="h-8 w-8" />
                       </div>
@@ -96,20 +91,19 @@ export default function TraineeDashboard() {
                           <div className="h-2 flex-1 overflow-hidden rounded-full bg-[var(--color-surface-raised)]">
                             <div 
                               className="h-full rounded-full bg-[var(--color-secondary)] transition-all duration-1000" 
-                              style={{ width: `${enrollment.progress}%` }} 
+                              style={{ width: `${course.progress}%` }} 
                             />
                           </div>
-                          <span className="text-xs font-medium text-[var(--color-on-surface-muted)]">{enrollment.progress}%</span>
+                          <span className="text-xs font-medium text-[var(--color-on-surface-muted)]">{course.progress}%</span>
                         </div>
                       </div>
                       <div className="shrink-0">
-                        <button className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-primary)] text-white transition-transform group-hover:scale-110 focus-ring">
+                        <Link href={`/trainee/courses/${course.id}`} className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-primary)] text-white transition-transform group-hover:scale-110 focus-ring">
                           <PlayCircle className="h-5 w-5" />
-                        </button>
+                        </Link>
                       </div>
                     </div>
-                  );
-                })
+                  ))
               )}
             </div>
           </section>

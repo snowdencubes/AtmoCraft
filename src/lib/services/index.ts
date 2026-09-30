@@ -4,6 +4,7 @@ import {
   TrainerCompetency, CertificationRecord, DashboardStats, Role
 } from '@/lib/types';
 import * as mocks from '@/lib/mock';
+import { enrollmentsRepo, feedbackRepo, resourcesRepo } from '@/lib/db/repos';
 
 const DELAY = 500;
 const delay = (ms: number = DELAY) => new Promise(r => setTimeout(r, ms));
@@ -33,13 +34,45 @@ export const getCourseById = async (id: string): Promise<Course | undefined> => 
 // Enrollments
 export const getEnrollments = async (userId: string): Promise<Enrollment[]> => {
   await delay();
-  return mocks.mockEnrollments.filter(e => e.userId === userId);
+  const all = await enrollmentsRepo.findAll();
+  return all.filter((e: Enrollment) => e.userId === userId);
 };
 
 export const enrollInCourse = async (courseId: string, userId: string): Promise<boolean> => {
   await delay();
-  console.log(`User ${userId} enrolled in ${courseId}`);
+  await enrollmentsRepo.create({
+    courseId,
+    userId,
+    progress: 0,
+    viewedResources: [],
+    enrolledAt: new Date().toISOString()
+  } as Enrollment);
   return true;
+};
+
+export const markResourceViewed = async (courseId: string, userId: string, resourceId: string): Promise<void> => {
+  await delay(200);
+  const enrollments = await enrollmentsRepo.findAll();
+  const enrollment = enrollments.find(e => e.courseId === courseId && e.userId === userId);
+  if (!enrollment) return;
+
+  const viewed = enrollment.viewedResources || [];
+  if (!viewed.includes(resourceId)) {
+    const updatedViewed = [...viewed, resourceId];
+    
+    // Calculate progress: share of resources opened + assessment (simplified: just resources for now)
+    const allResources = await resourcesRepo.findAll();
+    const courseResources = allResources.filter(r => r.courseId === courseId);
+    
+    const progress = courseResources.length > 0 
+      ? Math.round((updatedViewed.length / courseResources.length) * 100) 
+      : 100;
+
+    await enrollmentsRepo.update(enrollment.id, {
+      viewedResources: updatedViewed,
+      progress
+    });
+  }
 };
 
 // Resources
@@ -73,7 +106,25 @@ export const getQuestionnaires = async (): Promise<Questionnaire[]> => {
 // Feedback
 export const getFeedback = async (courseId: string): Promise<Feedback[]> => {
   await delay();
-  return mocks.mockFeedback.filter(f => f.courseId === courseId);
+  const all = await feedbackRepo.findAll();
+  return all.filter((f: Feedback) => f.courseId === courseId);
+};
+
+export const saveFeedback = async (feedback: Omit<Feedback, 'id' | 'createdAt'>): Promise<Feedback> => {
+  await delay(300);
+  const all = await feedbackRepo.findAll();
+  const existing = all.find(f => f.courseId === feedback.courseId && f.userId === feedback.userId);
+  
+  if (existing) {
+    const updated = await feedbackRepo.update(existing.id, feedback);
+    return updated as Feedback;
+  } else {
+    const created = await feedbackRepo.create({
+      ...feedback,
+      createdAt: new Date().toISOString()
+    } as Feedback);
+    return created;
+  }
 };
 
 // Announcements
