@@ -8,7 +8,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, asChild = false, size = "default", ...props }, ref) => {
     if (asChild) {
-      const child = React.Children.only(props.children) as React.ReactElement;
+      const child = React.Children.only(props.children) as React.ReactElement<any>;
       return React.cloneElement(child, {
         className: `inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${className} ${child.props.className || ""}`,
         ref
