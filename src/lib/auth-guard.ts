@@ -30,7 +30,7 @@ export async function requireAuth(allowedRoles?: string[]) {
     redirect('/pending')
   }
   
-  if (dbUser.status === 'rejected' || dbUser.status === 'deactivated') {
+  if (dbUser.status === 'inactive') {
     // You could redirect to a specific /banned or /rejected page
     redirect('/login?error=account_deactivated')
   }
