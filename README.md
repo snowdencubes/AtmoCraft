@@ -173,7 +173,7 @@ npm run lint
 ```
 
 ### 🧪 Demo Accounts
-*(Use these to test the different role dashboards without Supabase auth enabled just yet)*
+*(Use these credentials to log into the application. They have been seeded into the Supabase authentication database.)*
 
 | Role | Email | Password |
 | **Admin** | admin@imd.gov.in | Password123! |
