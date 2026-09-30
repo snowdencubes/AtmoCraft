@@ -163,7 +163,6 @@ export default function CourseDetailsPage({ params }: { params: { courseId: stri
               <p className="text-sm text-[var(--color-on-surface-muted)] italic">Syllabus not available.</p>
             )}
           </div>
-          </div>
 
           {isEnrolled && (
             <div className="rounded-xl border bg-[var(--color-surface-card)] p-6 shadow-sm">
