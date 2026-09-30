@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <!-- Hexagon Clip Path -->
+    <clipPath id="hex-clip">
+      <!-- A pointy-topped hexagon in a 200x200 box, slightly scaled down to fit inside rings -->
+      <polygon points="100,25 165,62.5 165,137.5 100,175 35,137.5 35,62.5" />
+    </clipPath>
+
+    <!-- Sci-Fi Glow Filters -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="glow-saffron" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="hud-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ff" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#00f" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#f93" stop-opacity="0.8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background/HUD Elements -->
+  <!-- Outer rotating ring with dashes -->
+  <g transform="translate(100, 100)">
+    <circle cx="0" cy="0" r="85" fill="none" stroke="url(#hud-gradient)" stroke-width="2" stroke-dasharray="10 5 40 10 2 5" filter="url(#glow-cyan)">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="20s" repeatCount="indefinite" />
+    </circle>
+    
+    <!-- Inner rotating ring (reverse) -->
+    <circle cx="0" cy="0" r="75" fill="none" stroke="#f93" stroke-width="1.5" stroke-dasharray="20 10 5 10" filter="url(#glow-saffron)" opacity="0.8">
+      <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="15s" repeatCount="indefinite" />
+    </circle>
+    
+    <!-- HUD ticks -->
+    <path d="M 0 -95 L 0 -88 M 0 95 L 0 88 M -95 0 L -88 0 M 95 0 L 88 0" stroke="#0ff" stroke-width="2" filter="url(#glow-cyan)" />
+  </g>
+
+  <!-- Profile Image clipped to hexagon -->
+  <!-- Note: 200x200 image so it covers the hexagon properly -->
+  <image href="https://github.com/krishkumarcodes.png" x="25" y="25" width="150" height="150" preserveAspectRatio="xMidYMid slice" clip-path="url(#hex-clip)" />
+
+  <!-- Hexagon glowing border overlaid -->
+  <polygon points="100,25 165,62.5 165,137.5 100,175 35,137.5 35,62.5" fill="none" stroke="#0ff" stroke-width="3" filter="url(#glow-cyan)" opacity="0.9" />
+  
+  <!-- Saffron inner accent line -->
+  <polygon points="100,32 158.5,65.5 158.5,134.5 100,168 41.5,134.5 41.5,65.5" fill="none" stroke="#f93" stroke-width="1" filter="url(#glow-saffron)" opacity="0.7" />
+</svg>

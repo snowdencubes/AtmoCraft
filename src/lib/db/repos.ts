@@ -1,102 +1,98 @@
-import { useDbStore } from './store';
-
-type HasId = { id?: string } & Record<string, any>;
-
-function createRepo<T extends HasId>(tableName: keyof Omit<ReturnType<typeof useDbStore.getState>, 'resetDemoData' | 'setTable'>) {
-  return {
-    findAll: async (): Promise<T[]> => {
-      const state = useDbStore.getState();
-      return (state[tableName] as T[]) || [];
-    },
-    
-    findById: async (id: string): Promise<T | undefined> => {
-      const state = useDbStore.getState();
-      const records = state[tableName] as T[];
-      return records.find((record) => record.id === id);
-    },
-    
-    create: async (data: T): Promise<T> => {
-      const state = useDbStore.getState();
-      const records = state[tableName] as T[];
-      
-      const newRecord = {
-        ...data,
-        id: data.id || crypto.randomUUID(),
-      };
-      
-      useDbStore.getState().setTable(tableName, [...records, newRecord] as any);
-      return newRecord;
-    },
-    
-    update: async (id: string, data: Partial<T>): Promise<T | undefined> => {
-      const state = useDbStore.getState();
-      const records = state[tableName] as T[];
-      const index = records.findIndex((record) => record.id === id);
-      
-      if (index === -1) return undefined;
-      
-      const updatedRecord = { ...records[index], ...data };
-      const newRecords = [...records];
-      newRecords[index] = updatedRecord;
-      
-      useDbStore.getState().setTable(tableName, newRecords as any);
-      return updatedRecord;
-    },
-    
-    delete: async (id: string): Promise<boolean> => {
-      const state = useDbStore.getState();
-      const records = state[tableName] as T[];
-      const index = records.findIndex((record) => record.id === id);
-      
-      if (index === -1) return false;
-      
-      const newRecords = records.filter((record) => record.id !== id);
-      useDbStore.getState().setTable(tableName, newRecords as any);
-      return true;
-    }
-  };
-}
-
+import { supabase } from '@/lib/supabase';
 import {
   User, Profile, Course, Enrollment, Resource, Assessment,
   Question, Attempt, Questionnaire, Feedback, Announcement,
   Competency, TrainerCompetency, CertificationRecord, Notification
 } from '@/lib/types';
-import { QuestionnaireResponse } from './store';
+
+export interface QuestionnaireResponse {
+  id: string;
+  questionnaireId: string;
+  userId: string;
+  answers: Record<string, string | number>;
+  submittedAt: string;
+}
+
+type HasId = { id?: string } & Record<string, any>;
+
+function createRepo<T extends HasId>(tableName: string) {
+  return {
+    findAll: async (): Promise<T[]> => {
+      const { data, error } = await supabase.from(tableName).select('*');
+      if (error) throw error;
+      return data as T[];
+    },
+    
+    findById: async (id: string): Promise<T | undefined> => {
+      const { data, error } = await supabase.from(tableName).select('*').eq('id', id).single();
+      if (error && error.code !== 'PGRST116') throw error;
+      return data as T | undefined;
+    },
+    
+    create: async (data: T): Promise<T> => {
+      const { data: inserted, error } = await supabase
+        .from(tableName)
+        .insert({ ...data, id: data.id || crypto.randomUUID() })
+        .select()
+        .single();
+      if (error) throw error;
+      return inserted as T;
+    },
+    
+    update: async (id: string, data: Partial<T>): Promise<T | undefined> => {
+      const { data: updated, error } = await supabase
+        .from(tableName)
+        .update(data)
+        .eq('id', id)
+        .select()
+        .single();
+      if (error) throw error;
+      return updated as T | undefined;
+    },
+    
+    delete: async (id: string): Promise<boolean> => {
+      const { error } = await supabase.from(tableName).delete().eq('id', id);
+      if (error) throw error;
+      return true;
+    }
+  };
+}
 
 export const baseUsersRepo = createRepo<User>('users');
 export const usersRepo = {
   ...baseUsersRepo,
   findByEmail: async (email: string) => {
-    const users = await baseUsersRepo.findAll();
-    return users.find((u: User) => u.email === email);
+    const { data, error } = await supabase.from('users').select('*').eq('email', email).single();
+    if (error && error.code !== 'PGRST116') throw error;
+    return data as User | undefined;
   }
 };
 
 export const profilesRepo = {
-  findAll: async () => useDbStore.getState().profiles,
-  findByUserId: async (userId: string) => useDbStore.getState().profiles.find(p => p.userId === userId),
+  findAll: async () => {
+    const { data, error } = await supabase.from('profiles').select('*');
+    if (error) throw error;
+    return data as Profile[];
+  },
+  findByUserId: async (userId: string) => {
+    const { data, error } = await supabase.from('profiles').select('*').eq('userId', userId).single();
+    if (error && error.code !== 'PGRST116') throw error;
+    return data as Profile | undefined;
+  },
   create: async (data: Profile) => {
-    const current = useDbStore.getState().profiles;
-    useDbStore.getState().setTable('profiles', [...current, data]);
-    return data;
+    const { data: inserted, error } = await supabase.from('profiles').insert(data).select().single();
+    if (error) throw error;
+    return inserted as Profile;
   },
   update: async (userId: string, data: Partial<Profile>) => {
-    const current = useDbStore.getState().profiles;
-    const index = current.findIndex(p => p.userId === userId);
-    if (index === -1) return undefined;
-    const updated = { ...current[index], ...data };
-    const newRecords = [...current];
-    newRecords[index] = updated;
-    useDbStore.getState().setTable('profiles', newRecords);
-    return updated;
+    const { data: updated, error } = await supabase.from('profiles').update(data).eq('userId', userId).select().single();
+    if (error) throw error;
+    return updated as Profile | undefined;
   },
   delete: async (userId: string) => {
-    const current = useDbStore.getState().profiles;
-    const initialLen = current.length;
-    const newRecords = current.filter(p => p.userId !== userId);
-    useDbStore.getState().setTable('profiles', newRecords);
-    return newRecords.length < initialLen;
+    const { error } = await supabase.from('profiles').delete().eq('userId', userId);
+    if (error) throw error;
+    return true;
   }
 };
 
@@ -111,21 +107,29 @@ export const questionnaireResponsesRepo = createRepo<QuestionnaireResponse>('que
 export const feedbackRepo = createRepo<Feedback>('feedback');
 export const announcementsRepo = createRepo<Announcement>('announcements');
 export const competenciesRepo = createRepo<Competency>('competencies');
+
 export const trainerCompetenciesRepo = {
-  findAll: async () => useDbStore.getState().trainer_competencies,
-  findByTrainerId: async (trainerId: string) => useDbStore.getState().trainer_competencies.filter(tc => tc.trainerId === trainerId),
+  findAll: async () => {
+    const { data, error } = await supabase.from('trainer_competencies').select('*');
+    if (error) throw error;
+    return data as TrainerCompetency[];
+  },
+  findByTrainerId: async (trainerId: string) => {
+    const { data, error } = await supabase.from('trainer_competencies').select('*').eq('trainerId', trainerId);
+    if (error) throw error;
+    return data as TrainerCompetency[];
+  },
   create: async (data: TrainerCompetency) => {
-    const current = useDbStore.getState().trainer_competencies;
-    useDbStore.getState().setTable('trainer_competencies', [...current, data]);
-    return data;
+    const { data: inserted, error } = await supabase.from('trainer_competencies').insert(data).select().single();
+    if (error) throw error;
+    return inserted as TrainerCompetency;
   },
   delete: async (trainerId: string, competencyId: string) => {
-    const current = useDbStore.getState().trainer_competencies;
-    const initialLen = current.length;
-    const newRecords = current.filter(tc => !(tc.trainerId === trainerId && tc.competencyId === competencyId));
-    useDbStore.getState().setTable('trainer_competencies', newRecords);
-    return newRecords.length < initialLen;
+    const { error } = await supabase.from('trainer_competencies').delete().eq('trainerId', trainerId).eq('competencyId', competencyId);
+    if (error) throw error;
+    return true;
   }
 };
+
 export const certificationRecordsRepo = createRepo<CertificationRecord>('certification_records');
 export const notificationsRepo = createRepo<Notification>('notifications');
