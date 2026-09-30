@@ -217,7 +217,7 @@ We welcome contributions! Please review our [Contributing Guide](./docs/CONTRIBU
 <div align="center">
   <h3>Made by</h3>
   <a href="https://github.com/krishkumarcodes">
-    <img src="./assets/krish-profile.jpg" alt="Krish Kumar" width="160" height="160" style="border-radius: 50%; object-fit: cover;" />
+    <img src="./assets/krish-profile.jpg" alt="Krish Kumar" width="160" height="160" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); object-fit: cover;" />
   </a>
   <p><b>Krish Kumar</b></p>
   <p><a href="mailto:krishkumarcodes@gmail.com">Contact Me</a></p>
