@@ -176,12 +176,13 @@ npm run lint
 *(Use these credentials to log into the application. They have been seeded into the Supabase authentication database.)*
 
 | Role | Email | Password |
-| **Admin** | admin@imd.gov.in | Password123! |
-| **Trainer 1** | trainer1@imd.gov.in | Password123! |
-| **Trainer 2** | trainer2@imd.gov.in | Password123! |
-| **Trainee 1** | trainee1@imd.gov.in | Password123! |
-| **Trainee 2** | trainee2@imd.gov.in | Password123! |
-| **Trainee 3** | trainee3@imd.gov.in | Password123! |
+| :--- | :--- | :--- |
+| 🛡️ **Admin** | `admin@imd.gov.in` | <kbd>Password123!</kbd> |
+| 👨‍🏫 **Trainer 1** | `trainer1@imd.gov.in` | <kbd>Password123!</kbd> |
+| 👨‍🏫 **Trainer 2** | `trainer2@imd.gov.in` | <kbd>Password123!</kbd> |
+| 🎓 **Trainee 1** | `trainee1@imd.gov.in` | <kbd>Password123!</kbd> |
+| 🎓 **Trainee 2** | `trainee2@imd.gov.in` | <kbd>Password123!</kbd> |
+| 🎓 **Trainee 3** | `trainee3@imd.gov.in` | <kbd>Password123!</kbd> |
 
 ---
 
