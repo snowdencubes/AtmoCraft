@@ -1,52 +1,130 @@
-# 🌩️ Capacity Connect
+<div align="center">
 
-> **Digital Capacity Building and Learning Management Portal for the India Meteorological Department (IMD)**
->
-> *Smart India Hackathon 2026 - Problem Statement SIH26075 (Ministry of Earth Sciences)*
+<img src="./assets/banner.svg" alt="Capacity Connect Animated Banner" width="100%" />
 
-![Capacity Connect Preview](https://via.placeholder.com/1200x600/1e3a5f/ffffff?text=Capacity+Connect+Dashboard)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Inter&weight=500&size=20&duration=3000&pause=1000&color=5B9BD5&center=true&vCenter=true&repeat=true&width=500&lines=Role-based+learning+portal;MCQ+assessments+and+certificates;Built+for+SIH+2026;India+Meteorological+Department)](https://git.io/typing-svg)
 
-## 🌟 The Vision
+![GitHub License](https://img.shields.io/github/license/snowdencubes/boxy?style=flat-square&color=1e3a5f)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
+![Tailwind](https://img.shields.io/badge/Tailwind-v4-38B2AC?style=flat-square&logo=tailwind-css)
+![Supabase](https://img.shields.io/badge/Supabase-Planned-green?style=flat-square&logo=supabase)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/snowdencubes/boxy?style=flat-square&color=e8943a)
 
-**Capacity Connect** is a centralized, state-of-the-art web portal designed exclusively for the personnel of the India Meteorological Department. It brings together people, content, and tracking under one unified roof to foster a culture of continuous learning and digital empowerment.
+<br/>
 
-Our goal is to modernize the way IMD staff train, share knowledge, and build competencies—transitioning from scattered documents and offline seminars to a rich, interactive, and trackable digital learning ecosystem synced with the iGOT Karmayogi philosophy.
+**[About](#-about-the-project)** • 
+**[Highlights](#-highlights)** • 
+**[Features](#-features-by-role)** • 
+**[Tech Stack](#-tech-stack)** • 
+**[Getting Started](#-getting-started)** • 
+**[Roadmap](#-roadmap)** • 
+**[Contributing](#-contributing)** • 
+**[License](#-license)**
 
----
+</div>
 
-## 🚀 Key Features (The "Wow" Factor)
-
-- **🧭 Role-Based Dashboards:** Distinct, intuitive experiences for Trainees, Trainers, and Administrators.
-- **📚 Rich Course Catalog:** Multimedia learning including interactive videos, presentations, and PDFs.
-- **✅ Competency & Assessments:** Rigorous MCQ assessments with automated scoring and instant feedback.
-- **🏆 Digital Passport:** Verifiable certification records and comprehensive skill matrices for every employee.
-- **🔍 Intelligent Trainer Finder:** Connect with experts across IMD based on exact competencies and proficiency levels.
-- **📊 Real-time Analytics:** Deep insights for administrators into learning trends, completion rates, and platform engagement.
-
----
-
-## 🛠️ Technology Stack
-
-We built Capacity Connect with modern, scalable, and robust technologies:
-
-- **Frontend Framework:** Next.js 16 (App Router)
-- **Language:** TypeScript (Strict Mode)
-- **Styling:** Tailwind CSS v4 + Custom CSS Variables for a seamless light/dark mode experience.
-- **State Management:** Zustand
-- **Icons:** Lucide React
-- **Forms & Validation:** React Hook Form + Zod
-- **Database (Demo):** In-memory Zustand persist store (Migrating to **Supabase** for production)
-- **File Storage (Demo):** IndexedDB (Migrating to Cloud Storage)
+<img src="https://capsule-render.vercel.app/api?type=wave&color=1e3a5f&height=80&section=header" alt="Wave Divider" width="100%" />
 
 ---
 
-## 🎨 Design Philosophy
+## 🎯 About the project
 
-Our design aesthetic is built on **trust, clarity, and modernity**:
-- **Trustworthy Colors:** Deep Navy (`#1e3a5f`), Sky Blue (`#5b9bd5`), and Saffron (`#e8943a`) reflect the gravity of earth sciences and the Indian government.
-- **Fluid Micro-animations:** 150-250ms smooth transitions make the interface feel alive and highly responsive.
-- **Soft Geometry:** `rounded-2xl` cards and subtle layered shadows reduce cognitive load and create a premium feel.
-- **Accessibility First:** High contrast ratios, focus rings (`focus-visible`), and semantic HTML ensure the platform is usable by everyone.
+Capacity Connect is a centralized, state-of-the-art web portal designed exclusively for the personnel of the India Meteorological Department (IMD) to solve problem statement **SIH26075**.
+
+It transforms how IMD staff train, share knowledge, and build competencies by transitioning from scattered offline documents to a rich, interactive, and trackable digital learning ecosystem. Because continuous learning matters when you're predicting the weather and keeping the nation safe.
+
+---
+
+## ✨ Highlights
+
+| 🧭 Role-Based Dashboards | 📚 Rich Course Catalog | ✅ Competency & Assessments |
+| :--- | :--- | :--- |
+| Distinct, secure layouts for Trainees, Trainers, and Admins. | Multimedia learning with videos, presentations, and interactive modules. | Rigorous MCQ assessments with instant auto-grading and feedback. |
+
+| 🏆 Digital Passport | 🔍 Intelligent Trainer Finder | 📊 Real-time Analytics |
+| :--- | :--- | :--- |
+| Verifiable certification records tracking lifelong learning. | Connect with IMD experts based on exact proficiency levels. | Deep insights into learning trends and platform engagement. |
+
+---
+
+## 👥 Features by Role
+
+<details>
+<summary><b>🎓 Trainee Experience</b></summary>
+
+- **Command Palette (`Cmd+K`)**: Rapid global navigation.
+- **Dynamic Profile**: Digital passport tracking work experience, skills, and certificate uploads.
+- **Course Catalog**: Filter by subject, level, and trainer to find the perfect training.
+- **Interactive Resources Viewer**: Learn at your own pace with tracked progress.
+- **Automated Assessments**: Take MCQs, get instant scores, and earn verifiable certificates if you score > 50%.
+</details>
+
+<details>
+<summary><b>👨‍🏫 Trainer Experience</b></summary>
+
+- **Analytics Dashboard**: See how many trainees are enrolled in your courses at a glance.
+- **Resource Library**: Upload massive files (via IndexedDB locally, migrating to cloud) and assign them to your modules.
+- **Questionnaire Creator**: Build and edit complex MCQ exams for your subjects.
+</details>
+
+<details>
+<summary><b>🛡️ Administrator Experience</b></summary>
+
+- **Platform KPI Overview**: Track total users, active courses, and system health.
+- **Access Control**: Approve new signups, manage roles, and deactivate exiting employees.
+</details>
+
+---
+
+## 📸 Screenshots
+*(Adding soon to `docs/screenshots`)*
+
+---
+
+## 🔄 How It Works
+
+```mermaid
+graph LR
+    A[Sign up] -->|Pending| B(Admin Approval)
+    B --> C{Login}
+    C -->|Trainee| D[Enroll in Course]
+    D --> E[View Resources]
+    E --> F[Take Assessment]
+    F -->|Pass > 50%| G((Earn Certificate))
+```
+
+### Architecture Blueprint
+```mermaid
+graph TD
+    Client[Client Browser] --> NextApp[Next.js 16 Application]
+    NextApp --> UI[React Server Components / Client UI]
+    NextApp --> State[Zustand State Manager]
+    State --> Services[Service Layer API]
+    Services --> Repos[Repository Layer Pattern]
+    Repos -.-> DB[(Zustand Persist Demo)]
+    Repos --> SDB[(Supabase PostgreSQL - LIVE)]
+```
+
+---
+
+## 🛠 Tech Stack
+
+<div align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=nextjs,ts,tailwind,react,supabase,docker,githubactions" alt="Tech Stack" />
+  </a>
+</div>
+<br/>
+
+| Technology | Purpose |
+|------------|---------|
+| **Next.js 16** | App Router provides exceptional nested layouts and SEO. |
+| **TypeScript** | Strict typing for enterprise reliability. |
+| **Tailwind CSS v4** | Consistent, token-based design system and glassmorphism. |
+| **Zustand** | Lighter, boilerplate-free state management. |
+| **Supabase** | Robust PostgreSQL backend with Row Level Security (RLS). |
 
 ---
 
@@ -55,60 +133,132 @@ Our design aesthetic is built on **trust, clarity, and modernity**:
 ```text
 boxy/
 ├── src/
-│   ├── app/                 # Next.js App Router pages & layouts
-│   │   ├── (public)/        # Login, Signup, Homepage
-│   │   ├── (trainee)/       # Trainee dashboard, courses, assessments
-│   │   ├── (trainer)/       # Trainer dashboard, library, questionnaires
-│   │   └── (admin)/         # Admin dashboard, user management
-│   ├── components/          # Reusable UI components
-│   │   └── shared/          # Buttons, Cards, Modals, Navbars
-│   ├── lib/                 # Business logic & utilities
-│   │   ├── db/              # Stage 1: Demo Database & Repositories
-│   │   ├── services/        # Service layer (auth, courses, users)
-│   │   └── types.ts         # Global TypeScript definitions
-│   └── store/               # Zustand state management
-├── docs/                    # Detailed technical documentation
-└── public/                  # Static assets
+│   ├── app/                 # Next.js App Router (Grouped by Roles)
+│   ├── components/          # Shared UI (Command Palette, Cards, Layouts)
+│   ├── lib/
+│   │   ├── db/repos.ts      # Repository pattern abstracting DB queries
+│   │   ├── supabase.ts      # Live Supabase connection client
+│   │   └── mock/            # Demo data seeders
+│   └── store/               # Ephemeral Auth state
+├── supabase/migrations/     # SQL schemas mapping exactly to TypeScript types
+├── docs/                    # Technical blueprints and specifications
+└── assets/                  # Animated SVGs and branding
 ```
 
 ---
 
-## ⚙️ Getting Started (Development)
+## 🚀 Getting Started
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/snowdencubes/boxy.git
-   cd boxy
-   ```
+### Prerequisites
+- Node.js >= 20.0.0
+- npm or yarn
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/snowdencubes/boxy.git
+cd boxy
 
-3. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
+# Install dependencies (use --no-bin-links for Android/Termux environments)
+npm install
 
-4. **Open your browser:**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+# Start the dev server
+npm run dev
+```
+
+### Build & Test
+```bash
+npm run build
+npm run lint
+```
+
+### 🧪 Demo Accounts
+*(Use these to test the different role dashboards without Supabase auth enabled just yet)*
+
+| Role | Email | Password |
+|------|-------|----------|
+| **Admin** | admin@imd.gov.in | admin123 |
+| **Trainer** | trainer@imd.gov.in | trainer123 |
+| **Trainee** | trainee@imd.gov.in | trainee123 |
 
 ---
 
 ## 📖 Documentation
-
-For detailed technical insights, please refer to our `docs/` folder:
 - [Architecture Blueprint](./docs/ARCHITECTURE.md)
 - [Data Model & Schema](./docs/DATA_MODEL.md)
 - [Service Layer API](./docs/SERVICES.md)
-- [Business Assumptions](./docs/ASSUMPTIONS.md)
+- [Business Assumptions](./docs/ASSUMPTIONS.md) *(Notes on passing marks, retries, etc.)*
 - [SIH Presentation Demo Script](./docs/DEMO_SCRIPT.md)
 
 ---
 
-## 🤝 Contribution Guidelines
+## 🗺️ Roadmap
 
-Please read our comprehensive [Contributing Guide](./docs/CONTRIBUTING.md) before making any PRs. All contributions for SIH26075 should be pushed through authorized accounts. Ensure you follow the strict TypeScript guidelines and run `npm run lint` before committing.
+- [x] Initial Next.js setup with Tailwind v4
+- [x] Role-based route guards and authentication hashing
+- [x] Trainee Flows (Enrollment, Resources, Assessments)
+- [x] Trainer Flows (Libraries, Questionnaires)
+- [x] Local DB to Supabase SQL Migration Scripts written
+- [ ] Connect Authentication to Supabase Auth
+- [ ] Connect File Uploads to Supabase Storage buckets
+- [ ] Email notifications
+- [ ] Hindi / Regional language support
 
-*Built with ❤️ for the Ministry of Earth Sciences, Govt. of India.*
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please review our [Contributing Guide](./docs/CONTRIBUTING.md) and [Code of Conduct](./CODE_OF_CONDUCT.md). Ensure all PRs pass `npm run lint` and follow the Conventional Commits specification.
+
+---
+
+## 🌟 Contributors
+
+<div align="center">
+  <h3>Made by</h3>
+  <a href="https://github.com/krishkumarcodes">
+    <img src="https://github.com/krishkumarcodes.png?size=120" width="120" style="border-radius: 50%;" alt="Krishkumarcodes" />
+  </a>
+  <p><b>Krishkumarcodes</b></p>
+  <p><a href="mailto:krishkumarcodes@gmail.com">Contact Me</a></p>
+  
+  <br/>
+  <a href="https://github.com/snowdencubes/boxy/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=snowdencubes/boxy" alt="Contributors" />
+  </a>
+</div>
+
+---
+
+## 📈 Star History
+
+<div align="center">
+  <a href="https://star-history.com/#snowdencubes/boxy&Date">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=snowdencubes/boxy&type=Date&theme=dark" />
+      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=snowdencubes/boxy&type=Date" />
+      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=snowdencubes/boxy&type=Date" />
+    </picture>
+  </a>
+</div>
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+- **Smart India Hackathon 2026**
+- **Ministry of Earth Sciences, India Meteorological Department**
+- *Note: This is a hackathon prototype and not an official IMD or MoES production product.*
+
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=1e3a5f&height=40&section=footer" alt="Wave Footer" width="100%" />
+  <br/>
+  <i>If you like this project, <a href="https://github.com/snowdencubes/boxy">give it a star ⭐️</a></i>
+  <br/>
+  <a href="#-capacity-connect">⬆️ Back to Top</a>
+</div>
