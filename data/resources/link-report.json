@@ -1,0 +1,93 @@
+{
+  "working": 6,
+  "redirected": 1,
+  "broken": 2,
+  "login_required": 5,
+  "downgraded": 5,
+  "details": {
+    "ecmwf-understanding-weather-forecast-uncertainty": {
+      "url_status": "redirected",
+      "url_code": 303,
+      "file_status": null,
+      "licenseDowngraded": false
+    },
+    "imd-forecaster-course-syllabus": {
+      "url_status": "broken",
+      "url_code": "timeout",
+      "file_status": "broken",
+      "licenseDowngraded": false
+    },
+    "imd-forecaster-training-course": {
+      "url_status": "broken",
+      "url_code": "timeout",
+      "file_status": null,
+      "licenseDowngraded": false
+    },
+    "imd-nwp-operational-products": {
+      "url_status": "working",
+      "url_code": 200,
+      "file_status": null,
+      "licenseDowngraded": false
+    },
+    "ncep-mag-model-guidance-products-guide": {
+      "url_status": "working",
+      "url_code": 200,
+      "file_status": null,
+      "licenseDowngraded": false
+    },
+    "ncep-model-analyses-guidance-users-guide": {
+      "url_status": "working",
+      "url_code": 200,
+      "file_status": null,
+      "licenseDowngraded": false
+    },
+    "ncep-model-guidance-portal": {
+      "url_status": "working",
+      "url_code": 200,
+      "file_status": null,
+      "licenseDowngraded": false
+    },
+    "noaa-jetstream-model-output-statistics": {
+      "url_status": "login_required",
+      "url_code": 403,
+      "file_status": null,
+      "licenseDowngraded": true
+    },
+    "noaa-jetstream-norwegian-cyclone-model": {
+      "url_status": "login_required",
+      "url_code": 403,
+      "file_status": null,
+      "licenseDowngraded": true
+    },
+    "noaa-jetstream-surface-weather-maps": {
+      "url_status": "login_required",
+      "url_code": 403,
+      "file_status": null,
+      "licenseDowngraded": true
+    },
+    "noaa-jetstream-weather-models": {
+      "url_status": "login_required",
+      "url_code": 403,
+      "file_status": null,
+      "licenseDowngraded": true
+    },
+    "noaa-jetstream-weather-school": {
+      "url_status": "login_required",
+      "url_code": 403,
+      "file_status": null,
+      "licenseDowngraded": true
+    },
+    "wmo-etrp-forecasting-topic-6": {
+      "url_status": "working",
+      "url_code": 200,
+      "file_status": null,
+      "licenseDowngraded": false
+    },
+    "wmo-self-study-forecast-training-directory": {
+      "url_status": "working",
+      "url_code": 200,
+      "file_status": null,
+      "licenseDowngraded": false
+    }
+  }
+}

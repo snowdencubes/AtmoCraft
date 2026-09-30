@@ -176,10 +176,12 @@ npm run lint
 *(Use these to test the different role dashboards without Supabase auth enabled just yet)*
 
 | Role | Email | Password |
-|------|-------|----------|
-| **Admin** | admin@imd.gov.in | admin123 |
-| **Trainer** | trainer@imd.gov.in | trainer123 |
-| **Trainee** | trainee@imd.gov.in | trainee123 |
+| **Admin** | admin@imd.gov.in | Password123! |
+| **Trainer 1** | trainer1@imd.gov.in | Password123! |
+| **Trainer 2** | trainer2@imd.gov.in | Password123! |
+| **Trainee 1** | trainee1@imd.gov.in | Password123! |
+| **Trainee 2** | trainee2@imd.gov.in | Password123! |
+| **Trainee 3** | trainee3@imd.gov.in | Password123! |
 
 ---
 

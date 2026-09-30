@@ -1,17 +1,17 @@
--- AtmoCraft - Initial Schema Migration
-
--- This schema matches the types defined in src/lib/types.ts to ensure
--- a 1-to-1 mapping when using Supabase data fetching.
+-- ==========================================
+-- 01_schema.sql: Base Tables & Triggers
+-- ==========================================
 
 -- Users
 CREATE TABLE users (
-  "id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  "id" UUID PRIMARY KEY REFERENCES auth.users("id") ON DELETE CASCADE,
   "name" TEXT NOT NULL,
   "email" TEXT UNIQUE NOT NULL,
   "role" TEXT NOT NULL, 
   "avatar" TEXT NOT NULL,
   "department" TEXT NOT NULL,
   "status" TEXT NOT NULL,
+  "username" TEXT UNIQUE,
   "createdAt" TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
@@ -25,6 +25,48 @@ CREATE TABLE profiles (
   "certificates" JSONB NOT NULL DEFAULT '[]',
   "completionPercent" INTEGER NOT NULL DEFAULT 0
 );
+
+-- Trigger to create users and profiles automatically when a user signs up via auth
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS TRIGGER AS $$
+DECLARE
+  requested_role TEXT;
+  requested_status TEXT;
+BEGIN
+  requested_role := NEW.raw_user_meta_data->>'role';
+  IF requested_role NOT IN ('trainee', 'trainer', 'admin') THEN
+    requested_role := 'trainee';
+  END IF;
+
+  requested_status := NEW.raw_user_meta_data->>'status';
+  IF requested_status IS NULL THEN
+    requested_status := 'pending';
+  END IF;
+
+  INSERT INTO public.users (id, name, email, role, avatar, department, status, username, "createdAt")
+  VALUES (
+    NEW.id,
+    COALESCE(NEW.raw_user_meta_data->>'name', 'Unknown'),
+    NEW.email,
+    requested_role,
+    '/avatars/default.png',
+    COALESCE(NEW.raw_user_meta_data->>'department', 'General'),
+    requested_status,
+    NEW.raw_user_meta_data->>'username',
+    now()
+  );
+
+  INSERT INTO public.profiles ("userId")
+  VALUES (NEW.id);
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+
 
 -- Courses
 CREATE TABLE courses (
@@ -40,6 +82,7 @@ CREATE TABLE courses (
   "rating" FLOAT NOT NULL DEFAULT 0,
   "syllabus" JSONB NOT NULL DEFAULT '[]',
   "imageUrl" TEXT NOT NULL,
+  "status" TEXT NOT NULL DEFAULT 'published',
   "createdAt" TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
@@ -77,7 +120,7 @@ CREATE TABLE assessments (
   "createdAt" TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
--- Questions (Standalone bank or reusable)
+-- Questions
 CREATE TABLE questions (
   "id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   "text" TEXT NOT NULL,

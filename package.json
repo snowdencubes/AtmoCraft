@@ -8,6 +8,7 @@
     "build": "next build --webpack",
     "start": "next start",
     "start:with-alive": "python scripts/keep_alive.py & next start",
+    "seed:users": "npx tsx scripts/seed-demo-users.ts",
     "lint": "eslint"
   },
   "dependencies": {

@@ -1,6 +1,8 @@
--- AtmoCraft: Stage 3 - Security, RLS, Storage, and Views Migration
+-- ==========================================
+-- 02_security.sql: Security, RLS, Views & Storage
+-- ==========================================
 
--- 1. Create Helper Functions for Security
+-- 1. Helper Functions
 CREATE OR REPLACE FUNCTION public.current_user_role()
 RETURNS TEXT
 LANGUAGE sql
@@ -10,7 +12,21 @@ AS $$
   SELECT role FROM users WHERE id = auth.uid() OR id::text = current_setting('request.jwt.claims', true)::jsonb->>'sub';
 $$;
 
--- 2. Enable Row Level Security (RLS) on all tables
+CREATE OR REPLACE FUNCTION public.get_email_by_username(p_username TEXT)
+RETURNS TEXT
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+DECLARE
+  v_email TEXT;
+BEGIN
+  SELECT email INTO v_email FROM users WHERE username = p_username LIMIT 1;
+  RETURN v_email;
+END;
+$$;
+
+-- 2. Enable RLS
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE courses ENABLE ROW LEVEL SECURITY;
@@ -20,6 +36,7 @@ ALTER TABLE assessments ENABLE ROW LEVEL SECURITY;
 ALTER TABLE questions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE attempts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE questionnaires ENABLE ROW LEVEL SECURITY;
+ALTER TABLE questionnaire_responses ENABLE ROW LEVEL SECURITY;
 ALTER TABLE feedback ENABLE ROW LEVEL SECURITY;
 ALTER TABLE announcements ENABLE ROW LEVEL SECURITY;
 ALTER TABLE competencies ENABLE ROW LEVEL SECURITY;
@@ -28,27 +45,41 @@ ALTER TABLE certification_records ENABLE ROW LEVEL SECURITY;
 ALTER TABLE notifications ENABLE ROW LEVEL SECURITY;
 
 -- 3. RLS Policies
-
--- Users: Read own data, Admins read all
+-- Users
 CREATE POLICY "Users can read own data" ON users FOR SELECT USING (id = auth.uid());
 CREATE POLICY "Admins can manage all users" ON users FOR ALL USING (public.current_user_role() = 'admin');
 
--- Profiles: Users manage own profile (except role/status, handled by API), Admins manage all
+-- Profiles
 CREATE POLICY "Users can manage own profile" ON profiles FOR ALL USING ("userId" = auth.uid());
 CREATE POLICY "Admins can manage all profiles" ON profiles FOR ALL USING (public.current_user_role() = 'admin');
 
--- Courses: Anyone can read published courses, Trainers manage own, Admins manage all
+-- Courses
 CREATE POLICY "Anyone can read published courses" ON courses FOR SELECT USING (status = 'published');
 CREATE POLICY "Trainers can manage own courses" ON courses FOR ALL USING ("trainerId" = auth.uid() AND public.current_user_role() = 'trainer');
 CREATE POLICY "Admins can manage all courses" ON courses FOR ALL USING (public.current_user_role() = 'admin');
 
--- 4. Storage Buckets Creation
+-- 4. Storage Setup
 INSERT INTO storage.buckets (id, name, public) VALUES ('avatars', 'avatars', true) ON CONFLICT DO NOTHING;
 INSERT INTO storage.buckets (id, name, public) VALUES ('course-covers', 'course-covers', true) ON CONFLICT DO NOTHING;
 INSERT INTO storage.buckets (id, name, public) VALUES ('certificates', 'certificates', false) ON CONFLICT DO NOTHING;
 INSERT INTO storage.buckets (id, name, public) VALUES ('library', 'library', false) ON CONFLICT DO NOTHING;
 
--- 5. Dashboard Views for Fast Analytics
+-- 5. Storage RLS Policies (Apply to storage.objects)
+CREATE POLICY "Avatars are publicly accessible" ON storage.objects FOR SELECT USING (bucket_id = 'avatars');
+CREATE POLICY "Users can upload their own avatars" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'avatars' AND auth.uid()::text = (storage.foldername(name))[1]);
+CREATE POLICY "Users can update their own avatars" ON storage.objects FOR UPDATE USING (bucket_id = 'avatars' AND auth.uid()::text = (storage.foldername(name))[1]);
+
+CREATE POLICY "Course covers are publicly accessible" ON storage.objects FOR SELECT USING (bucket_id = 'course-covers');
+CREATE POLICY "Trainers/Admins can upload course covers" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'course-covers' AND public.current_user_role() IN ('trainer', 'admin'));
+
+CREATE POLICY "Users can read own certificates" ON storage.objects FOR SELECT USING (bucket_id = 'certificates' AND auth.uid()::text = (storage.foldername(name))[1]);
+CREATE POLICY "Trainers/Admins can manage certificates" ON storage.objects FOR ALL USING (bucket_id = 'certificates' AND public.current_user_role() IN ('trainer', 'admin'));
+
+CREATE POLICY "Library files readable by authenticated" ON storage.objects FOR SELECT USING (bucket_id = 'library' AND auth.uid() IS NOT NULL);
+CREATE POLICY "Trainers can manage library" ON storage.objects FOR ALL USING (bucket_id = 'library' AND public.current_user_role() IN ('trainer', 'admin'));
+
+
+-- 6. Views
 CREATE OR REPLACE VIEW admin_dashboard_stats AS
 SELECT 
   (SELECT count(*) FROM users) as total_users,
@@ -56,7 +87,7 @@ SELECT
   (SELECT count(*) FROM enrollments) as total_enrollments,
   (SELECT count(*) FROM certification_records) as total_certifications;
 
--- Prevent role/status modifications on UPDATE for Users table (Column Guard Trigger)
+-- 7. Prevent Role Escalation Trigger
 CREATE OR REPLACE FUNCTION prevent_role_status_update()
 RETURNS TRIGGER AS $$
 BEGIN

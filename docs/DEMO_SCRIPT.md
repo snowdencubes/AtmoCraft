@@ -2,9 +2,10 @@
 
 This script outlines the click-by-click journey for demonstrating AtmoCraft during the SIH presentation.
 
-## Demo Accounts
-- **Admin:** `admin@atmocraft.com` / `Password123!`
-- **Learner:** `learner@atmocraft.com` / `Password123!`
+## Demo Accounts (DEMO ONLY - Controllable by NEXT_PUBLIC_DEMO_MODE)
+- **Admin:** `admin@imd.gov.in` / `Password123!`
+- **Trainer 1:** `trainer1@imd.gov.in` / `Password123!`
+- **Trainee 1:** `trainee1@imd.gov.in` / `Password123!`
 
 ---
 
