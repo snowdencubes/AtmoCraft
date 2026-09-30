@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { PageHeader } from "@/components/shared/page-header";
 import { SkeletonCard } from "@/components/shared/skeleton";
 import { BookOpen, Clock, Users, Star, Filter, Search, ChevronDown } from "lucide-react";
@@ -163,9 +164,18 @@ export default function TraineeCourses() {
         ) : (
           filteredAndSortedCourses.map(course => (
             <div key={course.id} className="group flex flex-col overflow-hidden rounded-xl border bg-[var(--color-surface-card)] shadow-sm transition-all hover:shadow-md">
-              <div className="relative h-40 w-full bg-[var(--color-primary)] p-4 flex items-center justify-center">
-                <BookOpen className="h-12 w-12 text-white/20" />
-                <div className="absolute right-3 top-3 rounded bg-white/20 px-2 py-0.5 text-xs font-bold text-white backdrop-blur capitalize">
+              <div className="relative h-40 w-full bg-[var(--color-primary)] p-4 flex items-center justify-center overflow-hidden">
+                {course.imageUrl ? (
+                  <Image 
+                    src={course.imageUrl} 
+                    alt={course.title} 
+                    fill 
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <BookOpen className="h-12 w-12 text-white/20 z-10 relative" />
+                )}
+                <div className="absolute right-3 top-3 rounded bg-white/90 px-2 py-0.5 text-xs font-bold text-[var(--color-primary)] backdrop-blur capitalize z-10 shadow-sm">
                   {course.level}
                 </div>
               </div>

@@ -3,7 +3,7 @@
 -- Delete existing mock courses
 DELETE FROM public.courses;
 
-INSERT INTO public.courses (id, title, description, subject, level, duration, "trainerId", "trainerName", thumbnail, created_at, updated_at)
+INSERT INTO public.courses (id, title, description, subject, level, duration, "trainerId", "trainerName", "imageUrl", created_at, updated_at)
 VALUES 
   (
     gen_random_uuid(), 

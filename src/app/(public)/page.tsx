@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { GraduationCap, Presentation, Shield, ArrowRight, BookOpen, Award } from "lucide-react";
 import { Announcement, CertificationRecord, Course } from "@/lib/types";
 import { getAnnouncements, getCertifications, getCourses } from "@/lib/services";
@@ -58,7 +59,15 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-secondary)] px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+        <section className="relative overflow-hidden bg-[var(--color-primary-dark)] px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+          {/* Hero Banner Background Image */}
+          <Image
+            src="/images/hero-banner.jpg"
+            alt="AtmoCraft Hero Banner"
+            fill
+            priority
+            className="object-cover opacity-60 mix-blend-overlay"
+          />
           {/* Subtle background pattern (SVG) */}
           <div className="absolute inset-0 opacity-10">
             <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
@@ -244,11 +253,22 @@ export default function HomePage() {
             ) : (
               courses.map((course) => (
                 <div key={course.id} className="group flex flex-col overflow-hidden rounded-2xl border bg-[var(--color-surface-card)] shadow-sm transition-all hover:shadow-xl">
-                  <div className="relative h-48 w-full bg-[var(--color-primary-light)]/20 p-6">
-                    <div className="absolute right-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-[var(--color-primary)] backdrop-blur">
+                  <div className="relative h-48 w-full bg-[var(--color-primary-light)]/20 p-6 overflow-hidden">
+                    <div className="absolute right-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-[var(--color-primary)] backdrop-blur z-10 shadow-sm">
                       {course.level}
                     </div>
-                    <BookOpen className="h-12 w-12 text-[var(--color-primary)]/40" />
+                    {course.imageUrl ? (
+                      <Image 
+                        src={course.imageUrl} 
+                        alt={course.title} 
+                        fill 
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center">
+                        <BookOpen className="h-12 w-12 text-[var(--color-primary)]/40" />
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-1 flex-col p-6">
                     <div className="mb-2 text-xs font-bold uppercase tracking-wider text-[var(--color-secondary)]">{course.subject}</div>
