@@ -217,9 +217,9 @@ We welcome contributions! Please review our [Contributing Guide](./docs/CONTRIBU
 <div align="center">
   <h3>Made by</h3>
   <a href="https://github.com/krishkumarcodes">
-    <img src="./assets/krish-profile.svg" alt="Krishkumarcodes" width="160" />
+    <img src="./assets/krish-profile.svg" alt="Showden" width="160" />
   </a>
-  <p><b>Krishkumarcodes</b></p>
+  <p><b>Showden</b></p>
   <p><a href="mailto:krishkumarcodes@gmail.com">Contact Me</a></p>
   
   <br/>
