@@ -3,7 +3,7 @@
 -- Delete existing mock courses
 DELETE FROM public.courses;
 
-INSERT INTO public.courses (id, title, description, subject, level, duration, "trainerId", "trainerName", "imageUrl", created_at, updated_at)
+INSERT INTO public.courses (id, title, description, subject, level, duration, "trainerId", "trainerName", "imageUrl", "createdAt")
 VALUES 
   (
     gen_random_uuid(), 
@@ -15,7 +15,6 @@ VALUES
     (SELECT id FROM public.users WHERE email = 'trainer@imd.gov.in' LIMIT 1), 
     'Senior Trainer', 
     '/images/courses/course_cover_radar.jpg', 
-    now(), 
     now()
   ),
   (
@@ -28,7 +27,6 @@ VALUES
     (SELECT id FROM public.users WHERE email = 'trainer@imd.gov.in' LIMIT 1), 
     'Senior Trainer', 
     '/images/courses/course_cover_synoptic.jpg', 
-    now(), 
     now()
   ),
   (
@@ -41,6 +39,5 @@ VALUES
     (SELECT id FROM public.users WHERE email = 'trainer@imd.gov.in' LIMIT 1), 
     'Senior Trainer', 
     '/images/courses/course_cover_satellite.jpg', 
-    now(), 
     now()
   );
