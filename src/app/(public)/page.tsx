@@ -36,267 +36,193 @@ export default function HomePage() {
     <>
       <main className="w-full">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-[var(--color-primary-dark)] px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+        <section className="relative overflow-hidden bg-[var(--primary-dark)] pt-32 pb-24 sm:pt-40 sm:pb-32 lg:pb-40">
           {/* Hero Banner Background Image */}
-          <Image
-            src="/images/hero-banner.jpg"
-            alt="AtmoCraft Hero Banner"
-            fill
-            priority
-            className="object-cover opacity-60 mix-blend-overlay"
-          />
-          {/* Subtle background pattern (SVG) */}
-          <div className="absolute inset-0 opacity-10">
-            <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/images/hero-banner.jpg"
+              alt="AtmoCraft Hero Banner"
+              fill
+              priority
+              className="object-cover"
+            />
+            {/* Breathtaking left-to-right dark gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--surface)]/95 via-[var(--surface)]/80 to-[var(--surface)]/20 dark:from-[#020617]/95 dark:via-[#020617]/80 dark:to-transparent" />
           </div>
           
-          <div className="relative mx-auto max-w-4xl text-center animate-slide-up">
-            <div className="mx-auto mb-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md">
-              <span className="flex h-2 w-2 rounded-full bg-[var(--color-success)] animate-pulse"></span>
-              Official Digital Capacity Building & LMS Portal
-            </div>
-            
-            <h1 className="font-heading text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Empowering IMD Professionals through <span className="text-[var(--color-secondary)]">Digital Learning</span>
-            </h1>
-            
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80 sm:text-xl">
-              Master weather forecasting, radar meteorology, satellite data analytics, and climate research with our comprehensive capacity building platform.
-            </p>
-            
-            <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-              <Link
-                href="/signup"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-8 py-3.5 text-base font-semibold text-white transition-all hover:bg-[var(--color-accent-light)] hover:shadow-[0_0_20px_rgba(232,148,58,0.4)] focus-ring"
-              >
-                Start Learning <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link
-                href="/login"
-                className="inline-flex items-center justify-center rounded-full border-2 border-white/30 bg-white/5 px-8 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-ring"
-              >
-                Sign In to Dashboard
-              </Link>
-            </div>
-          </div>
-          
-          {/* Stats Bar */}
-          <div className="relative mx-auto mt-20 max-w-5xl rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md sm:p-8 animate-fade-in">
-            <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-              <div className="text-center">
-                <p className="font-heading text-3xl font-bold text-white sm:text-4xl">12,500+</p>
-                <p className="mt-1 text-sm font-medium text-white/70">Personnel Trained</p>
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl animate-slide-up">
+              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] px-4 py-1.5 text-sm font-semibold text-[var(--primary-dark)] dark:text-white shadow-sm backdrop-blur-md">
+                <span className="flex h-2 w-2 rounded-full bg-[var(--success)] animate-pulse"></span>
+                Official Digital Capacity Building & LMS Portal
               </div>
-              <div className="text-center">
-                <p className="font-heading text-3xl font-bold text-[var(--color-secondary)] sm:text-4xl">85+</p>
-                <p className="mt-1 text-sm font-medium text-white/70">Specialized Courses</p>
-              </div>
-              <div className="text-center">
-                <p className="font-heading text-3xl font-bold text-[var(--color-accent)] sm:text-4xl">98.4%</p>
-                <p className="mt-1 text-sm font-medium text-white/70">Pass Rate</p>
-              </div>
-              <div className="text-center">
-                <p className="font-heading text-3xl font-bold text-white sm:text-4xl">iGOT</p>
-                <p className="mt-1 text-sm font-medium text-white/70">Karmayogi Synced</p>
+              
+              <h1 className="font-heading text-5xl font-extrabold tracking-tight text-[var(--on-surface)] sm:text-6xl lg:text-7xl text-balance">
+                Empowering IMD Professionals through <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent drop-shadow-sm">Digital Learning</span>
+              </h1>
+              
+              <p className="mt-6 max-w-2xl text-lg text-[var(--on-surface-muted)] sm:text-xl font-medium text-balance">
+                Master weather forecasting, radar meteorology, satellite data analytics, and climate research with our comprehensive capacity building platform.
+              </p>
+              
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                <Link
+                  href="/signup"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--primary-light)] px-8 py-4 text-base font-bold text-white transition-all hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(2,132,199,0.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
+                >
+                  Start Learning <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1.5" />
+                </Link>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center justify-center rounded-full border border-[var(--outline-strong)] bg-[var(--surface)]/50 px-8 py-4 text-base font-bold text-[var(--on-surface)] backdrop-blur-sm transition-colors hover:bg-[var(--surface-raised)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
+                >
+                  Sign In to Dashboard
+                </Link>
               </div>
             </div>
           </div>
         </section>
 
+        {/* Floating Glass Stats Bar */}
+        <div className="relative z-20 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 -mt-16 sm:-mt-20">
+          <div className="rounded-3xl border border-[var(--glass-border)] bg-[var(--glass-bg)] p-6 sm:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.5)] backdrop-blur-2xl animate-slide-up" style={{ animationDelay: "150ms" }}>
+            <div className="grid grid-cols-2 gap-8 md:grid-cols-4 divide-x divide-transparent md:divide-[var(--outline)]">
+              <div className="text-center px-4 flex flex-col items-center">
+                <div className="mb-2 rounded-full bg-[var(--primary)]/10 p-2.5 text-[var(--primary)]">
+                  <GraduationCap className="h-6 w-6" />
+                </div>
+                <p className="font-heading text-3xl font-bold text-[var(--on-surface)] sm:text-4xl">12.5k+</p>
+                <p className="mt-1 text-sm font-semibold text-[var(--on-surface-muted)]">Personnel Trained</p>
+              </div>
+              <div className="text-center px-4 flex flex-col items-center">
+                <div className="mb-2 rounded-full bg-[var(--secondary)]/10 p-2.5 text-[var(--primary)] dark:text-[var(--primary-light)]">
+                  <BookOpen className="h-6 w-6" />
+                </div>
+                <p className="font-heading text-3xl font-bold text-[var(--on-surface)] sm:text-4xl">85+</p>
+                <p className="mt-1 text-sm font-semibold text-[var(--on-surface-muted)]">Specialized Courses</p>
+              </div>
+              <div className="text-center px-4 flex flex-col items-center">
+                <div className="mb-2 rounded-full bg-[var(--accent)]/10 p-2.5 text-[var(--accent)]">
+                  <Award className="h-6 w-6" />
+                </div>
+                <p className="font-heading text-3xl font-bold text-[var(--on-surface)] sm:text-4xl">98.4%</p>
+                <p className="mt-1 text-sm font-semibold text-[var(--on-surface-muted)]">Pass Rate</p>
+              </div>
+              <div className="text-center px-4 flex flex-col items-center">
+                <div className="mb-2 rounded-full bg-[var(--success)]/10 p-2.5 text-[var(--success)]">
+                  <Shield className="h-6 w-6" />
+                </div>
+                <p className="font-heading text-3xl font-bold text-[var(--on-surface)] sm:text-4xl">iGOT</p>
+                <p className="mt-1 text-sm font-semibold text-[var(--on-surface-muted)]">Karmayogi Synced</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* How It Works (Role Cards) */}
-        <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="font-heading text-3xl font-bold text-[var(--color-primary)]">Designed for Every Meteorological Role</h2>
-            <p className="mt-4 text-[var(--color-on-surface-muted)]">Tailored learning journeys to meet your specific career goals within IMD.</p>
+        <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[var(--on-surface)] tracking-tight">Designed for Every Meteorological Role</h2>
+            <p className="mt-4 text-lg text-[var(--on-surface-muted)]">Tailored learning journeys to meet your specific career goals within IMD.</p>
           </div>
           
-          <div className="mt-16 grid gap-8 md:grid-cols-3">
-            <div className="group rounded-2xl border bg-[var(--color-surface-card)] p-8 shadow-sm transition-all hover:-translate-y-2 hover:shadow-lg">
-              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] transition-colors group-hover:bg-[var(--color-primary)] group-hover:text-white">
+          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="group rounded-3xl border border-[var(--outline)] bg-[var(--surface-card)] p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[var(--primary)]/30">
+              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] transition-colors group-hover:bg-[var(--primary)] group-hover:text-white">
                 <GraduationCap className="h-8 w-8" />
               </div>
-              <h3 className="font-heading text-xl font-bold">Trainee</h3>
-              <p className="mt-4 text-[var(--color-on-surface-muted)]">
+              <h3 className="font-heading text-2xl font-bold text-[var(--on-surface)]">Trainee</h3>
+              <p className="mt-4 text-[var(--on-surface-muted)] leading-relaxed font-medium">
                 Enroll in specialized courses, take comprehensive MCQ assessments, participate in radar simulators, and earn verifiable digital certificates.
               </p>
             </div>
             
-            <div className="group rounded-2xl border bg-[var(--color-surface-card)] p-8 shadow-sm transition-all hover:-translate-y-2 hover:shadow-lg">
-              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] transition-colors group-hover:bg-[var(--color-secondary)] group-hover:text-white">
+            <div className="group rounded-3xl border border-[var(--outline)] bg-[var(--surface-card)] p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[var(--secondary)]/50">
+              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--secondary)] text-[var(--secondary-foreground)] transition-transform group-hover:scale-110">
                 <Presentation className="h-8 w-8" />
               </div>
-              <h3 className="font-heading text-xl font-bold">Trainer</h3>
-              <p className="mt-4 text-[var(--color-on-surface-muted)]">
+              <h3 className="font-heading text-2xl font-bold text-[var(--on-surface)]">Trainer</h3>
+              <p className="mt-4 text-[var(--on-surface-muted)] leading-relaxed font-medium">
                 Author engaging courses, upload diverse study materials to your library, craft interactive questionnaires, and monitor trainee performance.
               </p>
             </div>
             
-            <div className="group rounded-2xl border bg-[var(--color-surface-card)] p-8 shadow-sm transition-all hover:-translate-y-2 hover:shadow-lg">
-              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--color-accent)]/10 text-[var(--color-accent)] transition-colors group-hover:bg-[var(--color-accent)] group-hover:text-white">
+            <div className="group rounded-3xl border border-[var(--outline)] bg-[var(--surface-card)] p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[var(--accent)]/50">
+              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--accent)]/10 text-[var(--accent)] transition-colors group-hover:bg-[var(--accent)] group-hover:text-white">
                 <Shield className="h-8 w-8" />
               </div>
-              <h3 className="font-heading text-xl font-bold">Admin</h3>
-              <p className="mt-4 text-[var(--color-on-surface-muted)]">
+              <h3 className="font-heading text-2xl font-bold text-[var(--on-surface)]">Admin</h3>
+              <p className="mt-4 text-[var(--on-surface-muted)] leading-relaxed font-medium">
                 Manage user approvals and roles, oversee platform-wide analytics, publish critical circulars, and generate MoES capacity reports.
               </p>
             </div>
           </div>
         </section>
 
-        <div className="bg-[var(--color-surface-raised)] py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-12 lg:grid-cols-2">
-              {/* Announcements */}
-              <div>
-                <h2 className="mb-6 flex items-center gap-2 font-heading text-2xl font-bold">
-                  <span className="h-4 w-1 rounded-full bg-[var(--color-primary)]"></span> Latest Circulars
-                </h2>
-                <div className="flex flex-col gap-4">
-                  {loading ? (
-                    Array(3).fill(0).map((_, i) => <SkeletonLine key={i} className="h-24 w-full" />)
-                  ) : (
-                    announcements.map((ann) => (
-                      <div key={ann.id} className="rounded-xl border bg-[var(--color-surface-card)] p-5 shadow-sm transition-shadow hover:shadow-md">
-                        <div className="flex items-center justify-between">
-                          <span className={cn(
-                            "rounded-full px-2.5 py-1 text-xs font-semibold",
-                            ann.type === 'notification' && "bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]",
-                            ann.type === 'announcement' && "bg-[var(--color-primary)]/10 text-[var(--color-primary)]",
-                            ann.type === 'achievement' && "bg-[var(--color-success)]/10 text-[var(--color-success)]",
-                            ann.type === 'new-content' && "bg-[var(--color-accent)]/10 text-[var(--color-accent)]",
-                          )}>
-                            {ann.type.toUpperCase()}
-                          </span>
-                          <span className="text-xs text-[var(--color-on-surface-muted)]">
-                            {new Date(ann.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
-                          </span>
-                        </div>
-                        <h4 className="mt-3 font-semibold">{ann.title}</h4>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-
-              {/* Achievements */}
-              <div>
-                <h2 className="mb-6 flex items-center gap-2 font-heading text-2xl font-bold">
-                  <span className="h-4 w-1 rounded-full bg-[var(--color-accent)]"></span> Recent Certifications
-                </h2>
-                <div className="flex flex-col gap-4">
-                  {loading ? (
-                    Array(3).fill(0).map((_, i) => <SkeletonLine key={i} className="h-20 w-full" />)
-                  ) : (
-                    certifications.map((cert) => (
-                      <div key={cert.id} className="flex items-center gap-4 rounded-xl border bg-[var(--color-surface-card)] p-4 shadow-sm">
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--color-success)]/10 text-[var(--color-success)]">
-                          <Award className="h-6 w-6" />
-                        </div>
-                        <div>
-                          <p className="font-semibold">{cert.userName}</p>
-                          <p className="text-sm text-[var(--color-on-surface-muted)]">Earned: {cert.courseName}</p>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* New Courses */}
-        <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mb-10 flex items-end justify-between">
-            <div>
-              <h2 className="font-heading text-3xl font-bold text-[var(--color-primary)]">Newly Added Content</h2>
-              <p className="mt-2 text-[var(--color-on-surface-muted)]">Explore the latest training modules curated by IMD experts.</p>
-            </div>
-            <Link href="/courses" className="hidden text-sm font-semibold text-[var(--color-secondary)] hover:underline sm:block">
-              View All Courses &rarr;
-            </Link>
+        {/* Dynamic CTA Section */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] py-24 sm:py-32">
+          {/* Organic Wave Divider Top */}
+          <div className="absolute top-0 left-0 right-0 w-full overflow-hidden leading-none">
+            <svg className="relative block w-full h-[60px] sm:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+              <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="fill-[var(--surface)]"></path>
+            </svg>
           </div>
           
-          <div className="grid gap-6 md:grid-cols-3">
-            {loading ? (
-              Array(3).fill(0).map((_, i) => <SkeletonCard key={i} />)
-            ) : (
-              courses.map((course) => (
-                <div key={course.id} className="group flex flex-col overflow-hidden rounded-2xl border bg-[var(--color-surface-card)] shadow-sm transition-all hover:shadow-xl">
-                  <div className="relative h-48 w-full bg-[var(--color-primary-light)]/20 p-6 overflow-hidden">
-                    <div className="absolute right-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-[var(--color-primary)] backdrop-blur z-10 shadow-sm">
-                      {course.level}
-                    </div>
-                    {course.imageUrl ? (
-                      <Image 
-                        src={course.imageUrl} 
-                        alt={course.title} 
-                        fill 
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center">
-                        <BookOpen className="h-12 w-12 text-[var(--color-primary)]/40" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex flex-1 flex-col p-6">
-                    <div className="mb-2 text-xs font-bold uppercase tracking-wider text-[var(--color-secondary)]">{course.subject}</div>
-                    <h3 className="font-heading text-xl font-bold line-clamp-2">{course.title}</h3>
-                    <p className="mt-2 text-sm text-[var(--color-on-surface-muted)]">By {course.trainerName}</p>
-                    <div className="mt-6 flex items-center justify-between pt-4 border-t border-[var(--color-outline)]">
-                      <span className="text-sm font-medium text-[var(--color-on-surface-muted)]">{course.duration}</span>
-                      <Link href={`/login`} className="text-sm font-bold text-[var(--color-accent)] hover:text-[var(--color-accent-light)]">
-                        Explore &rarr;
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
+          <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8 mt-12">
+            <h2 className="font-heading text-3xl font-extrabold tracking-tight text-white sm:text-5xl text-balance">
+              Ready to Advance Your Meteorological Career?
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80 font-medium text-balance">
+              Join thousands of IMD professionals already upgrading their skills on AtmoCraft. Your journey towards meteorological excellence starts here.
+            </p>
+            <div className="mt-10 flex justify-center">
+              <Link
+                href="/signup"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-lg font-bold text-[var(--primary-dark)] transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--primary)]"
+              >
+                Create Your Account <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1.5" />
+              </Link>
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="bg-[var(--color-primary-dark)] py-12 text-white">
+      <footer className="bg-[#020617] py-16 text-white border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 md:grid-cols-3">
-            <div>
+          <div className="grid gap-12 md:grid-cols-4">
+            <div className="md:col-span-2">
               <div className="flex items-center gap-2">
                 <Logo className="h-8 w-8" />
-                <span className="font-heading text-lg font-bold">AtmoCraft</span>
+                <span className="font-heading text-xl font-bold tracking-tight">AtmoCraft</span>
               </div>
-              <p className="mt-4 text-sm text-white/70">
+              <p className="mt-4 text-sm font-medium text-white/60 leading-relaxed max-w-sm">
                 A digital learning and capacity building platform exclusively for the personnel of the India Meteorological Department.
               </p>
             </div>
-            <div className="md:justify-self-center">
-              <h4 className="font-bold">Quick Links</h4>
-              <ul className="mt-4 flex flex-col gap-2 text-sm text-white/70">
-                <li><Link href="/login" className="hover:text-white">Sign In</Link></li>
-                <li><Link href="/signup" className="hover:text-white">Register</Link></li>
-                <li><a href="#" className="hover:text-white">IMD Main Portal</a></li>
-                <li><a href="#" className="hover:text-white">Ministry of Earth Sciences</a></li>
+            <div>
+              <h4 className="font-bold tracking-wide uppercase text-xs text-white/80">Quick Links</h4>
+              <ul className="mt-6 flex flex-col gap-3 text-sm font-medium text-white/60">
+                <li><Link href="/login" className="hover:text-[var(--primary-light)] transition-colors">Sign In</Link></li>
+                <li><Link href="/signup" className="hover:text-[var(--primary-light)] transition-colors">Register</Link></li>
+                <li><a href="#" className="hover:text-[var(--primary-light)] transition-colors">IMD Main Portal</a></li>
+                <li><a href="#" className="hover:text-[var(--primary-light)] transition-colors">Ministry of Earth Sciences</a></li>
               </ul>
             </div>
-            <div className="md:justify-self-end">
-              <h4 className="font-bold">Contact Support</h4>
-              <ul className="mt-4 flex flex-col gap-2 text-sm text-white/70">
+            <div>
+              <h4 className="font-bold tracking-wide uppercase text-xs text-white/80">Contact Support</h4>
+              <ul className="mt-6 flex flex-col gap-3 text-sm font-medium text-white/60">
                 <li>Helpdesk: support-cc@imd.gov.in</li>
                 <li>Phone: 011-24611068</li>
                 <li>Working Hours: 09:00 - 17:30 IST</li>
               </ul>
             </div>
           </div>
-          <div className="mt-12 border-t border-white/10 pt-8 text-center text-sm text-white/50">
-            <p>&copy; {new Date().getFullYear()} India Meteorological Department, Ministry of Earth Sciences, Government of India. All Rights Reserved.</p>
+          <div className="mt-16 flex flex-col md:flex-row items-center justify-between border-t border-white/10 pt-8 text-sm font-medium text-white/40">
+            <p>&copy; {new Date().getFullYear()} India Meteorological Department, MoES. All Rights Reserved.</p>
+            <div className="flex items-center gap-4 mt-4 md:mt-0">
+              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            </div>
           </div>
         </div>
       </footer>
