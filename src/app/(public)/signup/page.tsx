@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useToast } from "@/components/shared/toast";
 import { Loader2, Mail, Lock, User, Building, ShieldCheck, UserCircle, CheckCircle, XCircle } from "lucide-react";
 import { Logo } from "@/components/shared/logo";
+import { Button } from "@/components/ui/button";
 import { signup, checkUsername } from "@/app/actions/auth";
 
 // Debounce hook
@@ -70,42 +71,65 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[var(--color-surface)] p-4 py-12 relative overflow-hidden">
-      {/* Background aesthetics */}
-      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-[var(--color-secondary)]/20 rounded-full blur-[100px]" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-[var(--color-accent)]/20 rounded-full blur-[100px]" />
-
-      <div className="w-full max-w-xl overflow-hidden rounded-2xl border border-white/20 bg-white/60 dark:bg-gray-900/60 shadow-2xl backdrop-blur-xl animate-slide-up relative z-10">
-        <div className="bg-[var(--color-primary)]/90 p-8 text-center text-white backdrop-blur-md border-b border-white/10">
-          <Logo className="mx-auto mb-4 h-16 w-16" />
-          <h1 className="font-heading text-2xl font-bold tracking-tight">Create Account</h1>
-          <p className="mt-2 text-sm text-white/80 font-medium">Join the AtmoCraft Network</p>
+    <div className="flex min-h-screen bg-[var(--surface)]">
+      {/* Left Side - Image/Aesthetics (Hidden on Mobile) */}
+      <div className="relative hidden w-1/2 lg:block">
+        <div className="absolute inset-0 z-0">
+          <img src="/images/course-cover-synoptic.jpg" alt="Atmospheric weather" className="h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary-dark)]/90 to-[var(--primary)]/70 backdrop-blur-[2px]" />
         </div>
+        <div className="relative z-10 flex h-full flex-col justify-between p-12 text-white">
+          <Logo className="h-16 w-16" />
+          <div className="max-w-lg">
+            <h2 className="font-heading text-4xl font-bold leading-tight">
+              Begin your capacity building journey today.
+            </h2>
+            <p className="mt-4 text-lg font-medium text-white/80">
+              Create an account to enroll in specialized courses, access meteorological resources, and track your progress.
+            </p>
+          </div>
+          <div className="flex items-center gap-4 text-sm font-medium text-white/60">
+            <span>&copy; {new Date().getFullYear()} Ministry of Earth Sciences</span>
+          </div>
+        </div>
+      </div>
 
-        <div className="p-8">
-          <form action={handleSubmit} className="flex flex-col gap-5">
+      {/* Right Side - Auth Form */}
+      <div className="flex w-full items-center justify-center p-4 lg:w-1/2 relative overflow-hidden overflow-y-auto py-12">
+        {/* Subtle background glow on right side */}
+        <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-[var(--primary)]/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-96 h-96 bg-[var(--accent)]/10 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="w-full max-w-xl animate-fade-in relative z-10">
+          <div className="mb-10 text-center lg:text-left">
+            <Logo className="mx-auto mb-4 h-12 w-12 lg:hidden" />
+            <h1 className="font-heading text-3xl font-extrabold text-[var(--on-surface)] tracking-tight">Create Account</h1>
+            <p className="mt-2 text-[var(--on-surface-muted)] font-medium">Join the AtmoCraft Network</p>
+          </div>
+
+          <form action={handleSubmit} className="flex flex-col gap-6">
             <div className="flex gap-4 sm:flex-row flex-col">
               <div className="flex flex-col gap-2 flex-1">
-                <label className="text-sm font-medium">First Name</label>
+                <label className="text-sm font-semibold text-[var(--on-surface)]">First Name</label>
                 <div className="relative">
-                  <User className="absolute left-3 top-3 h-5 w-5 text-[var(--color-on-surface-muted)]" />
+                  <User className="absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--on-surface-muted)]" />
                   <input
                     type="text"
                     name="firstName"
-                    className="w-full rounded-xl border border-[var(--color-outline)] bg-white/50 dark:bg-black/20 py-2.5 pl-10 pr-4 outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 transition-all backdrop-blur-sm"
+                    className="w-full rounded-xl border border-[var(--outline)] bg-[var(--surface-card)] py-3 pl-11 pr-4 text-[var(--on-surface)] outline-none transition-all focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10"
                     placeholder="First Name"
                     required
                   />
                 </div>
               </div>
               <div className="flex flex-col gap-2 flex-1">
-                <label className="text-sm font-medium">Last Name</label>
+                <label className="text-sm font-semibold text-[var(--on-surface)]">Last Name</label>
                 <div className="relative">
-                  <User className="absolute left-3 top-3 h-5 w-5 text-[var(--color-on-surface-muted)]" />
+                  <User className="absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--on-surface-muted)]" />
                   <input
                     type="text"
                     name="lastName"
-                    className="w-full rounded-xl border border-[var(--color-outline)] bg-white/50 dark:bg-black/20 py-2.5 pl-10 pr-4 outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 transition-all backdrop-blur-sm"
+                    className="w-full rounded-xl border border-[var(--outline)] bg-[var(--surface-card)] py-3 pl-11 pr-4 text-[var(--on-surface)] outline-none transition-all focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10"
                     placeholder="Last Name"
                     required
                   />
@@ -114,38 +138,38 @@ export default function SignupPage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">Username</label>
+              <label className="text-sm font-semibold text-[var(--on-surface)]">Username</label>
               <div className="relative">
-                <UserCircle className="absolute left-3 top-3 h-5 w-5 text-[var(--color-on-surface-muted)]" />
+                <UserCircle className="absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--on-surface-muted)]" />
                 <input
                   type="text"
                   name="username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value.toLowerCase().trim())}
-                  className="w-full rounded-xl border border-[var(--color-outline)] bg-white/50 dark:bg-black/20 py-2.5 pl-10 pr-10 outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 transition-all backdrop-blur-sm"
+                  className="w-full rounded-xl border border-[var(--outline)] bg-[var(--surface-card)] py-3 pl-11 pr-11 text-[var(--on-surface)] outline-none transition-all focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10"
                   placeholder="e.g. forecaster_24"
                   required
                 />
-                <div className="absolute right-3 top-3">
-                  {usernameStatus === 'checking' && <Loader2 className="h-5 w-5 animate-spin text-[var(--color-secondary)]" />}
-                  {usernameStatus === 'available' && <CheckCircle className="h-5 w-5 text-[var(--color-success)]" />}
-                  {usernameStatus === 'taken' && <XCircle className="h-5 w-5 text-[var(--color-danger)]" />}
-                  {usernameStatus === 'invalid' && <XCircle className="h-5 w-5 text-[var(--color-warning)]" />}
+                <div className="absolute right-3.5 top-1/2 -translate-y-1/2">
+                  {usernameStatus === 'checking' && <Loader2 className="h-5 w-5 animate-spin text-[var(--primary)]" />}
+                  {usernameStatus === 'available' && <CheckCircle className="h-5 w-5 text-[var(--success)]" />}
+                  {usernameStatus === 'taken' && <XCircle className="h-5 w-5 text-[var(--danger)]" />}
+                  {usernameStatus === 'invalid' && <XCircle className="h-5 w-5 text-[var(--warning)]" />}
                 </div>
               </div>
-              {usernameStatus === 'invalid' && <span className="text-xs text-[var(--color-warning)]">3-20 lowercase letters, numbers, or underscores</span>}
-              {usernameStatus === 'taken' && <span className="text-xs text-[var(--color-danger)]">Username is already taken</span>}
-              {usernameStatus === 'available' && <span className="text-xs text-[var(--color-success)]">Username is available</span>}
+              {usernameStatus === 'invalid' && <span className="text-xs font-medium text-[var(--warning)]">3-20 lowercase letters, numbers, or underscores</span>}
+              {usernameStatus === 'taken' && <span className="text-xs font-medium text-[var(--danger)]">Username is already taken</span>}
+              {usernameStatus === 'available' && <span className="text-xs font-medium text-[var(--success)]">Username is available</span>}
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">Official Email (IMD)</label>
+              <label className="text-sm font-semibold text-[var(--on-surface)]">Official Email (IMD)</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 h-5 w-5 text-[var(--color-on-surface-muted)]" />
+                <Mail className="absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--on-surface-muted)]" />
                 <input
                   type="email"
                   name="email"
-                  className="w-full rounded-xl border border-[var(--color-outline)] bg-white/50 dark:bg-black/20 py-2.5 pl-10 pr-4 outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 transition-all backdrop-blur-sm"
+                  className="w-full rounded-xl border border-[var(--outline)] bg-[var(--surface-card)] py-3 pl-11 pr-4 text-[var(--on-surface)] outline-none transition-all focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10"
                   placeholder="name@imd.gov.in"
                   required
                 />
@@ -153,12 +177,12 @@ export default function SignupPage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">Department / Division</label>
+              <label className="text-sm font-semibold text-[var(--on-surface)]">Department / Division</label>
               <div className="relative">
-                <Building className="absolute left-3 top-3 h-5 w-5 text-[var(--color-on-surface-muted)]" />
+                <Building className="absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--on-surface-muted)] pointer-events-none" />
                 <select 
                   name="department"
-                  className="w-full appearance-none rounded-xl border border-[var(--color-outline)] bg-white/50 dark:bg-black/20 py-2.5 pl-10 pr-4 outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 transition-all backdrop-blur-sm"
+                  className="w-full appearance-none rounded-xl border border-[var(--outline)] bg-[var(--surface-card)] py-3 pl-11 pr-4 text-[var(--on-surface)] outline-none transition-all focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10"
                   required
                 >
                   <option value="">Select Department</option>
@@ -172,44 +196,63 @@ export default function SignupPage() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">Requested Role</label>
-              <div className="grid grid-cols-2 gap-3">
-                <label className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-[var(--color-outline)] bg-white/50 dark:bg-black/20 py-2.5 font-medium has-[:checked]:border-[var(--color-primary)] has-[:checked]:bg-[var(--color-primary)]/10 has-[:checked]:text-[var(--color-primary)] dark:has-[:checked]:text-[var(--color-secondary)] transition-all">
+            <div className="flex flex-col gap-3">
+              <label className="text-sm font-semibold text-[var(--on-surface)]">Requested Role</label>
+              <div className="grid grid-cols-2 gap-4">
+                <label className="group relative flex cursor-pointer flex-col rounded-xl border-2 border-[var(--outline)] bg-[var(--surface-card)] p-4 hover:bg-[var(--surface-raised)] has-[:checked]:border-[var(--primary)] has-[:checked]:bg-[var(--primary)]/5 transition-all outline-none focus-within:ring-4 focus-within:ring-[var(--primary)]/20">
                   <input type="radio" name="role" value="trainee" defaultChecked className="sr-only" />
-                  Trainee
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--outline)]/50 group-has-[:checked]:bg-[var(--primary)]/10 text-[var(--on-surface-muted)] group-has-[:checked]:text-[var(--primary)] transition-colors">
+                      <User className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-[var(--on-surface)]">Trainee</div>
+                      <div className="text-xs font-medium text-[var(--on-surface-muted)]">Enroll in courses</div>
+                    </div>
+                  </div>
+                  <div className="absolute right-4 top-4 h-4 w-4 rounded-full border-2 border-[var(--outline)] group-has-[:checked]:border-4 group-has-[:checked]:border-[var(--primary)] transition-all"></div>
                 </label>
-                <label className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-[var(--color-outline)] bg-white/50 dark:bg-black/20 py-2.5 font-medium has-[:checked]:border-[var(--color-primary)] has-[:checked]:bg-[var(--color-primary)]/10 has-[:checked]:text-[var(--color-primary)] dark:has-[:checked]:text-[var(--color-secondary)] transition-all">
+                
+                <label className="group relative flex cursor-pointer flex-col rounded-xl border-2 border-[var(--outline)] bg-[var(--surface-card)] p-4 hover:bg-[var(--surface-raised)] has-[:checked]:border-[var(--secondary)] has-[:checked]:bg-[var(--secondary)]/5 transition-all outline-none focus-within:ring-4 focus-within:ring-[var(--secondary)]/20">
                   <input type="radio" name="role" value="trainer" className="sr-only" />
-                  Trainer
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--outline)]/50 group-has-[:checked]:bg-[var(--secondary)]/10 text-[var(--on-surface-muted)] group-has-[:checked]:text-[var(--secondary)] transition-colors">
+                      <ShieldCheck className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-[var(--on-surface)]">Trainer</div>
+                      <div className="text-xs font-medium text-[var(--on-surface-muted)]">Author content</div>
+                    </div>
+                  </div>
+                  <div className="absolute right-4 top-4 h-4 w-4 rounded-full border-2 border-[var(--outline)] group-has-[:checked]:border-4 group-has-[:checked]:border-[var(--secondary)] transition-all"></div>
                 </label>
               </div>
             </div>
 
             <div className="flex gap-4 sm:flex-row flex-col">
               <div className="flex flex-col gap-2 flex-1">
-                <label className="text-sm font-medium">Password</label>
+                <label className="text-sm font-semibold text-[var(--on-surface)]">Password</label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-5 w-5 text-[var(--color-on-surface-muted)]" />
+                  <Lock className="absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--on-surface-muted)]" />
                   <input
                     type="password"
                     name="password"
                     minLength={8}
-                    className="w-full rounded-xl border border-[var(--color-outline)] bg-white/50 dark:bg-black/20 py-2.5 pl-10 pr-4 outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 transition-all backdrop-blur-sm"
+                    className="w-full rounded-xl border border-[var(--outline)] bg-[var(--surface-card)] py-3 pl-11 pr-4 text-[var(--on-surface)] outline-none transition-all focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10"
                     placeholder="Min 8 chars"
                     required
                   />
                 </div>
               </div>
               <div className="flex flex-col gap-2 flex-1">
-                <label className="text-sm font-medium">Confirm Password</label>
+                <label className="text-sm font-semibold text-[var(--on-surface)]">Confirm Password</label>
                 <div className="relative">
-                  <ShieldCheck className="absolute left-3 top-3 h-5 w-5 text-[var(--color-on-surface-muted)]" />
+                  <ShieldCheck className="absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--on-surface-muted)]" />
                   <input
                     type="password"
                     name="confirmPassword"
                     minLength={8}
-                    className="w-full rounded-xl border border-[var(--color-outline)] bg-white/50 dark:bg-black/20 py-2.5 pl-10 pr-4 outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 transition-all backdrop-blur-sm"
+                    className="w-full rounded-xl border border-[var(--outline)] bg-[var(--surface-card)] py-3 pl-11 pr-4 text-[var(--on-surface)] outline-none transition-all focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10"
                     placeholder="Confirm password"
                     required
                   />
@@ -217,22 +260,21 @@ export default function SignupPage() {
               </div>
             </div>
 
-            <button
+            <Button
               type="submit"
+              variant="primary"
+              size="lg"
               disabled={isLoading || usernameStatus === 'taken' || usernameStatus === 'invalid'}
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--color-accent)] py-3 font-semibold text-white transition-all hover:bg-[var(--color-accent-light)] hover:shadow-lg disabled:opacity-70 disabled:hover:shadow-none"
+              isLoading={isLoading}
+              className="mt-2 w-full text-base shadow-lg shadow-[var(--primary)]/20"
             >
-              {isLoading ? (
-                <Loader2 className="h-5 w-5 animate-spin" />
-              ) : (
-                "Create Account"
-              )}
-            </button>
+              Create Account
+            </Button>
           </form>
 
-          <p className="mt-8 text-center text-sm text-[var(--color-on-surface-muted)]">
+          <p className="mt-10 text-center text-sm font-medium text-[var(--on-surface-muted)]">
             Already have an account?{" "}
-            <Link href="/login" className="font-semibold text-[var(--color-primary)] hover:underline dark:text-[var(--color-secondary)]">
+            <Link href="/login" className="font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors">
               Sign in
             </Link>
           </p>
