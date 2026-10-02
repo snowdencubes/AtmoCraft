@@ -6,7 +6,7 @@ import { Toaster } from "@/components/shared/toast";
 import { AuthProvider } from "@/components/shared/auth-provider";
 
 const notoSans = Noto_Sans({ 
-  subsets: ["latin", "devanagari", "bengali"], 
+  subsets: ["latin", "devanagari"], 
   variable: "--font-body",
   weight: ["400", "500", "600", "700"],
   display: "swap",
