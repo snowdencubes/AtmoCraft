@@ -98,10 +98,12 @@ export default async function ResourceDetailPage(props: { params: Promise<{ slug
               {resource.redistribution_allowed.toUpperCase()}
             </div>
           )}
-          <div className="bg-zinc-950 border border-white/5 rounded-2xl p-4">
-            <span className="text-white/40 block mb-1">Cost</span>
-            {resource.cost.toUpperCase()}
-          </div>
+          {resource.cost && (
+            <div className="bg-zinc-950 border border-white/5 rounded-2xl p-4">
+              <span className="text-white/40 block mb-1">Cost</span>
+              {resource.cost.toUpperCase()}
+            </div>
+          )}
           {resource.languages && resource.languages.length > 0 && (
             <div className="bg-zinc-950 border border-white/5 rounded-2xl p-4">
               <span className="text-white/40 block mb-1">Language</span>
