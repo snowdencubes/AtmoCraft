@@ -79,49 +79,50 @@ export default function TraineeCourses() {
         breadcrumbs={[{ label: "Dashboard", href: "/trainee/dashboard" }, { label: "Courses" }]}
       />
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-5">
         {/* Top Controls: Search & Main Subject Pills */}
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 hide-scrollbar">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between bg-[var(--surface-card)] p-4 rounded-3xl border border-[var(--outline)] shadow-sm">
+          <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 hide-scrollbar flex-1">
             {uniqueSubjects.slice(0, 5).map(f => (
               <button 
                 key={f}
                 onClick={() => setSubjectFilter(f)}
                 className={cn(
-                  "rounded-full px-4 py-1.5 text-sm font-medium capitalize transition-colors focus-ring whitespace-nowrap",
+                  "rounded-full px-5 py-2 text-sm font-bold capitalize transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] whitespace-nowrap",
                   subjectFilter === f 
-                    ? "bg-[var(--color-primary)] text-white" 
-                    : "bg-[var(--color-surface-raised)] hover:bg-[var(--color-outline)] text-[var(--color-on-surface)]"
+                    ? "bg-gradient-to-r from-[var(--primary)] to-[var(--primary-dark)] text-white shadow-md shadow-[var(--primary)]/20" 
+                    : "bg-[var(--surface-raised)] hover:bg-[var(--outline)]/50 text-[var(--on-surface-muted)] hover:text-[var(--on-surface)]"
                 )}
               >
                 {f === 'all' ? 'All Subjects' : f}
               </button>
             ))}
           </div>
-          <div className="relative w-full sm:w-64 shrink-0">
-            <Search className="absolute left-3 top-2.5 h-4 w-4 text-[var(--color-on-surface-muted)]" />
+          <div className="relative w-full sm:w-80 shrink-0">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--on-surface-muted)]" />
             <input 
               type="text" 
-              placeholder="Search courses..."
+              placeholder="Search courses, skills, or instructors..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border bg-[var(--color-surface-card)] py-2 pl-9 pr-4 text-sm outline-none focus-ring text-[var(--color-on-surface)]"
+              className="w-full rounded-2xl border border-[var(--outline)] bg-[var(--surface)] py-3 pl-11 pr-4 text-sm font-medium outline-none transition-all focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10 text-[var(--on-surface)] placeholder:text-[var(--on-surface-muted)]/70"
             />
           </div>
         </div>
 
         {/* Secondary Filters: Level & Sort */}
-        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center p-3 bg-[var(--color-surface-raised)] rounded-lg border">
+        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center px-4 py-3 bg-[var(--surface-card)] rounded-2xl border border-[var(--outline)]/50">
           <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-[var(--color-on-surface-muted)]" />
-            <span className="text-sm font-medium text-[var(--color-on-surface)]">Filters:</span>
+            <Filter className="h-4 w-4 text-[var(--on-surface-muted)]" />
+            <span className="text-sm font-bold text-[var(--on-surface-muted)] uppercase tracking-wider">Refine</span>
           </div>
           
-          <div className="flex flex-wrap gap-3 w-full sm:w-auto">
+          <div className="flex flex-wrap gap-3 w-full sm:w-auto items-center">
             <select 
               value={levelFilter}
               onChange={(e) => setLevelFilter(e.target.value)}
-              className="bg-[var(--color-surface-card)] border rounded-md text-sm px-3 py-1.5 focus-ring text-[var(--color-on-surface)]"
+              className="appearance-none bg-[var(--surface-raised)] border border-[var(--outline)]/50 rounded-xl font-medium text-sm px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] text-[var(--on-surface)] transition-all cursor-pointer hover:border-[var(--primary)]/50"
+              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.7rem center', backgroundSize: '1em' }}
             >
               <option value="all">All Levels</option>
               {uniqueLevels.filter(l => l !== 'all').map(l => (
@@ -131,12 +132,13 @@ export default function TraineeCourses() {
 
             <div className="flex-1 sm:hidden"></div>
 
-            <div className="flex items-center gap-2 ml-auto sm:ml-4">
-              <span className="text-sm font-medium text-[var(--color-on-surface)] whitespace-nowrap">Sort by:</span>
+            <div className="flex items-center gap-3 ml-auto sm:ml-6">
+              <span className="text-sm font-bold text-[var(--on-surface-muted)] uppercase tracking-wider whitespace-nowrap">Sort</span>
               <select 
                 value={sortBy}
                 onChange={(e: any) => setSortBy(e.target.value)}
-                className="bg-[var(--color-surface-card)] border rounded-md text-sm px-3 py-1.5 focus-ring text-[var(--color-on-surface)]"
+                className="appearance-none bg-[var(--surface-raised)] border border-[var(--outline)]/50 rounded-xl font-medium text-sm px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] text-[var(--on-surface)] transition-all cursor-pointer hover:border-[var(--primary)]/50"
+                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.7rem center', backgroundSize: '1em' }}
               >
                 <option value="title">A-Z</option>
                 <option value="rating">Top Rated</option>
@@ -148,52 +150,62 @@ export default function TraineeCourses() {
       </div>
 
       {/* Course Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-2">
         {loading ? (
           Array(8).fill(0).map((_, i) => <SkeletonCard key={i} />)
         ) : filteredAndSortedCourses.length === 0 ? (
-          <div className="col-span-full py-12 text-center text-[var(--color-on-surface-muted)]">
-            <p>No courses found matching your criteria.</p>
+          <div className="col-span-full py-16 text-center">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[var(--surface-card)] border border-[var(--outline)] mb-4">
+              <Search className="h-10 w-10 text-[var(--on-surface-muted)]" />
+            </div>
+            <h3 className="text-xl font-bold text-[var(--on-surface)] mb-2">No courses found</h3>
+            <p className="text-[var(--on-surface-muted)]">Try adjusting your filters or search terms.</p>
             <button 
               onClick={() => { setSearchQuery(''); setSubjectFilter('all'); setLevelFilter('all'); }}
-              className="mt-4 text-[var(--color-primary)] hover:underline text-sm font-medium"
+              className="mt-6 rounded-xl bg-[var(--primary)] px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-[var(--primary-dark)] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
             >
               Clear filters
             </button>
           </div>
         ) : (
           filteredAndSortedCourses.map(course => (
-            <div key={course.id} className="group flex flex-col overflow-hidden rounded-xl border bg-[var(--color-surface-card)] shadow-sm transition-all hover:shadow-md">
-              <div className="relative h-40 w-full bg-[var(--color-primary)] p-4 flex items-center justify-center overflow-hidden">
+            <div key={course.id} className="group flex flex-col overflow-hidden rounded-3xl border border-[var(--outline)] bg-[var(--surface-card)] shadow-sm transition-all duration-300 hover:shadow-xl hover:border-[var(--primary)]/40 hover:-translate-y-1 relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              
+              <div className="relative h-48 w-full bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] p-4 flex items-center justify-center overflow-hidden">
                 {course.imageUrl ? (
                   <Image 
                     src={course.imageUrl} 
                     alt={course.title} 
                     fill 
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 mix-blend-overlay"
                   />
                 ) : (
-                  <BookOpen className="h-12 w-12 text-white/20 z-10 relative" />
+                  <BookOpen className="h-16 w-16 text-white/20 z-10 relative transition-transform duration-500 group-hover:scale-110 group-hover:text-white/40" />
                 )}
-                <div className="absolute right-3 top-3 rounded bg-white/90 px-2 py-0.5 text-xs font-bold text-[var(--color-primary)] backdrop-blur capitalize z-10 shadow-sm">
+                <div className="absolute left-4 top-4 rounded-lg bg-white/10 px-3 py-1 text-xs font-bold text-white backdrop-blur-md capitalize z-10 border border-white/20 shadow-lg flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                   {course.level}
                 </div>
               </div>
               
-              <div className="flex flex-1 flex-col p-4">
-                <span className="mb-2 text-xs font-bold uppercase tracking-wider text-[var(--color-secondary)]">{course.subject}</span>
-                <h3 className="font-heading font-bold leading-tight line-clamp-2 text-[var(--color-on-surface)]">{course.title}</h3>
-                <p className="mt-1 text-sm text-[var(--color-on-surface-muted)]">By {course.trainerName}</p>
+              <div className="flex flex-1 flex-col p-6 z-10">
+                <span className="mb-2 text-xs font-extrabold uppercase tracking-widest text-[var(--secondary)]">{course.subject}</span>
+                <h3 className="font-heading text-lg font-bold leading-tight line-clamp-2 text-[var(--on-surface)] group-hover:text-[var(--primary)] transition-colors">{course.title}</h3>
+                <p className="mt-2 text-sm font-medium text-[var(--on-surface-muted)]">By {course.trainerName}</p>
                 
-                <div className="mt-4 flex flex-wrap gap-3 text-xs text-[var(--color-on-surface-muted)]">
-                  <div className="flex items-center gap-1"><Clock className="h-3 w-3" /> {course.duration}</div>
-                  <div className="flex items-center gap-1"><Users className="h-3 w-3" /> {course.enrolled}</div>
-                  <div className="flex items-center gap-1"><Star className="h-3 w-3 text-yellow-500" /> {course.rating}</div>
+                <div className="mt-5 flex flex-wrap items-center gap-4 text-xs font-semibold text-[var(--on-surface-muted)]">
+                  <div className="flex items-center gap-1.5 bg-[var(--surface-raised)] px-2 py-1 rounded-md"><Clock className="h-3.5 w-3.5 text-[var(--primary)]" /> {course.duration}</div>
+                  <div className="flex items-center gap-1.5 bg-[var(--surface-raised)] px-2 py-1 rounded-md"><Users className="h-3.5 w-3.5 text-[var(--secondary)]" /> {course.enrolled}</div>
+                  <div className="flex items-center gap-1.5 bg-[var(--surface-raised)] px-2 py-1 rounded-md"><Star className="h-3.5 w-3.5 text-[var(--warning)]" /> {course.rating.toFixed(1)}</div>
                 </div>
                 
-                <div className="mt-auto pt-4">
-                  <Link href={`/trainee/courses/${course.id}`} className="block w-full rounded-lg bg-[var(--color-surface-raised)] py-2 text-sm font-semibold text-center transition-colors hover:bg-[var(--color-primary)] hover:text-white focus-ring text-[var(--color-on-surface)]">
+                <div className="mt-6 pt-5 border-t border-[var(--outline)]/50">
+                  <Link href={`/trainee/courses/${course.id}`} className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--surface-raised)] py-3 text-sm font-bold transition-all hover:bg-[var(--primary)] hover:text-white hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] text-[var(--on-surface)] group/btn">
                     View Details
+                    <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </Link>
                 </div>
               </div>
