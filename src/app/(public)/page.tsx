@@ -33,33 +33,8 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--color-surface)]">
-      {/* Top Navigation */}
-      <header className="sticky top-0 z-50 border-b border-[var(--color-primary-light)]/20 bg-[var(--color-primary)] text-white shadow-sm backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <Logo className="h-10 w-10" />
-            <div>
-              <h1 className="font-heading text-xl font-bold leading-none tracking-tight">AtmoCraft</h1>
-              <p className="text-[10px] font-medium text-white/70">Ministry of Earth Sciences</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <LanguageSwitcher />
-            <Link href="/login" className="hidden text-sm font-medium hover:text-[var(--color-secondary)] sm:block">
-              Sign In
-            </Link>
-            <Link
-              href="/signup"
-              className="rounded-full bg-[var(--color-accent)] px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-[var(--color-accent-light)] hover:shadow-lg focus-ring"
-            >
-              Get Started
-            </Link>
-          </div>
-        </div>
-      </header>
-
-      <main className="flex-1">
+    <>
+      <main className="w-full">
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-[var(--color-primary-dark)] px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
           {/* Hero Banner Background Image */}
@@ -325,6 +300,6 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
