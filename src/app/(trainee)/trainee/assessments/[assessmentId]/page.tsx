@@ -163,12 +163,15 @@ export default function AssessmentPage() {
 
   if (!assessment) {
     return (
-      <div className="p-8 text-center text-muted-foreground">
+      <div className="p-8 text-center text-[var(--on-surface-muted)]">
         Assessment not found.
         <div className="mt-4">
-          <Button onClick={() => router.push("/trainee/assessments")} variant="outline">
+          <button 
+            onClick={() => router.push("/trainee/assessments")} 
+            className="rounded-xl border border-[var(--outline)] px-6 py-2.5 font-bold text-[var(--on-surface)] transition-all hover:bg-[var(--surface-raised)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
+          >
             Go Back
-          </Button>
+          </button>
         </div>
       </div>
     );
@@ -188,6 +191,7 @@ export default function AssessmentPage() {
   const isAnswered = answers[currentQuestionIndex] !== -1;
   const isLastQuestion = currentQuestionIndex === assessment.questions.length - 1;
 
+  return (
     <div className="flex flex-col gap-8 max-w-6xl mx-auto">
       <PageHeader 
         title={assessment.title} 
