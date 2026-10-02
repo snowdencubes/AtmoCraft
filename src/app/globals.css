@@ -1,58 +1,109 @@
 @import "tailwindcss";
 
 @theme {
-  --font-heading: 'Plus Jakarta Sans', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  
-  --color-primary: #1e3a5f;
-  --color-primary-light: #2d5a8e;
-  --color-primary-dark: #0f1f33;
-  --color-secondary: #5b9bd5;
-  --color-secondary-light: #7eb3e0;
-  --color-accent: #e8943a;
-  --color-accent-light: #f0ab5e;
-  --color-success: #16a34a;
-  --color-warning: #f59e0b;
-  --color-danger: #dc2626;
-  
-  --color-surface: #f8f9ff;
-  --color-surface-card: #ffffff;
-  --color-surface-raised: #f1f5f9;
-  --color-on-surface: #0b1c30;
-  --color-on-surface-muted: #64748b;
-  --color-outline: #e2e8f0;
-  --color-outline-strong: #cbd5e1;
-}
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
 
-/* Dark theme */
-.dark {
-  --color-primary: #adc8f5;
-  --color-primary-light: #c5d9f7;
-  --color-primary-dark: #1e3a5f;
-  --color-secondary: #98cbff;
-  --color-secondary-light: #b5daff;
-  --color-accent: #ffb873;
-  --color-accent-light: #ffcfa0;
-  --color-success: #4ade80;
-  --color-warning: #fbbf24;
-  --color-danger: #f87171;
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-foreground: var(--primary-foreground);
   
-  --color-surface: #0a0f1a;
-  --color-surface-card: #111827;
-  --color-surface-raised: #1e293b;
-  --color-on-surface: #e2e8f0;
-  --color-on-surface-muted: #94a3b8;
-  --color-outline: #1e293b;
-  --color-outline-strong: #334155;
+  --color-secondary: var(--secondary);
+  --color-secondary-light: var(--secondary-light);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-accent-foreground: var(--accent-foreground);
+  
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  
+  --color-surface: var(--surface);
+  --color-surface-card: var(--surface-card);
+  --color-surface-raised: var(--surface-raised);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-muted: var(--on-surface-muted);
+  
+  --color-outline: var(--outline);
+  --color-outline-strong: var(--outline-strong);
+  
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
 }
 
 @layer base {
+  :root {
+    --primary: #0284c7; /* High contrast primary */
+    --primary-light: #38bdf8;
+    --primary-dark: #0369a1;
+    --primary-foreground: #ffffff;
+    
+    --secondary: #0f172a;
+    --secondary-light: #334155;
+    --secondary-foreground: #ffffff;
+    
+    --accent: #d97706; /* Amber 600 for contrast */
+    --accent-light: #f59e0b;
+    --accent-foreground: #ffffff;
+    
+    --success: #16a34a;
+    --warning: #d97706;
+    --danger: #dc2626;
+    
+    --surface: #f8fafc;
+    --surface-card: #ffffff;
+    --surface-raised: #f1f5f9;
+    --on-surface: #0f172a;
+    --on-surface-muted: #475569;
+    
+    --outline: #e2e8f0;
+    --outline-strong: #94a3b8;
+    
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+  }
+
+  .dark {
+    --primary: #38bdf8;
+    --primary-light: #7dd3fc;
+    --primary-dark: #0284c7;
+    --primary-foreground: #0f172a;
+    
+    --secondary: #e2e8f0;
+    --secondary-light: #cbd5e1;
+    --secondary-foreground: #0f172a;
+    
+    --accent: #fcd34d;
+    --accent-light: #fde68a;
+    --accent-foreground: #451a03;
+    
+    --success: #4ade80;
+    --warning: #fbbf24;
+    --danger: #f87171;
+    
+    --surface: #020617; /* Very dark blue for rich contrast */
+    --surface-card: #0f172a;
+    --surface-raised: #1e293b;
+    --on-surface: #f8fafc;
+    --on-surface-muted: #94a3b8;
+    
+    --outline: #1e293b;
+    --outline-strong: #475569;
+    
+    --glass-bg: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+  }
+
   * {
-    border-color: var(--color-outline);
+    border-color: var(--outline);
   }
   body {
-    background-color: var(--color-surface);
-    color: var(--color-on-surface);
+    background-color: var(--surface);
+    color: var(--on-surface);
     font-family: var(--font-body);
     scroll-behavior: smooth;
   }

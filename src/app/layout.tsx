@@ -1,12 +1,28 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Noto_Sans, Outfit, Fira_Code } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/shared/theme-provider";
 import { Toaster } from "@/components/shared/toast";
 import { AuthProvider } from "@/components/shared/auth-provider";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
+const notoSans = Noto_Sans({ 
+  subsets: ["latin", "devanagari", "bengali"], 
+  variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const outfit = Outfit({ 
+  subsets: ["latin"], 
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const firaCode = Fira_Code({ 
+  subsets: ["latin"], 
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -15,8 +31,8 @@ export const metadata: Metadata = {
   },
   description: "Official Digital Capacity Building & LMS Portal for the India Meteorological Department.",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#1e3a5f" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0f1a" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
   ],
 };
 
@@ -27,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jakarta.variable} antialiased`}>
+      <body className={`${notoSans.variable} ${outfit.variable} ${firaCode.variable} antialiased font-body`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
