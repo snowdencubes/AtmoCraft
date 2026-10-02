@@ -100,16 +100,14 @@ export function LanguageSwitcher() {
     <div className="relative" ref={menuRef}>
       <div id="google_translate_element" className="hidden"></div>
       
-      {isOpen && (
-        <Script
-          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-          strategy="lazyOnload"
-        />
-      )}
+      <Script
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+        strategy="lazyOnload"
+      />
       
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex h-10 w-10 sm:h-11 sm:w-auto items-center justify-center sm:px-4 sm:py-2 gap-2 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-md transition-all hover:bg-white/20 dark:hover:bg-black/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-sm"
+        className="flex h-10 w-10 sm:h-11 sm:w-auto items-center justify-center sm:px-4 sm:py-2 gap-2 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-md transition-all hover:bg-white/20 dark:hover:bg-black/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] shadow-sm"
         aria-label="Select Language"
         aria-expanded={isOpen}
       >
@@ -120,7 +118,7 @@ export function LanguageSwitcher() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-[calc(100vw-32px)] max-w-xs sm:w-64 origin-top-right overflow-hidden rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-[0_8px_40px_rgba(0,0,0,0.15)] backdrop-blur-2xl dark:shadow-[0_8px_40px_rgba(0,0,0,0.5)] z-[100] flex flex-col max-h-[70vh] sm:max-h-[400px] animate-fade-in notranslate" translate="no">
+        <div className="fixed left-4 right-4 top-[80px] sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-64 origin-top-right overflow-hidden rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-[0_8px_40px_rgba(0,0,0,0.15)] backdrop-blur-2xl dark:shadow-[0_8px_40px_rgba(0,0,0,0.5)] z-[100] flex flex-col max-h-[70vh] sm:max-h-[400px] animate-fade-in notranslate" translate="no">
           <div className="p-3 border-b border-[var(--outline)]">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--on-surface-muted)]" />
@@ -145,7 +143,7 @@ export function LanguageSwitcher() {
                     key={lang.code}
                     onClick={() => setLanguage(lang.code)}
                     className={cn(
-                      "flex items-center justify-between rounded-lg px-3 py-2.5 text-sm transition-colors hover:bg-[var(--surface-raised)] focus-visible:bg-[var(--surface-raised)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                      "flex items-center justify-between rounded-lg px-3 py-2.5 text-sm transition-colors hover:bg-[var(--surface-raised)] focus-visible:bg-[var(--surface-raised)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]",
                       currentLang === lang.code && "bg-[var(--primary)]/10 font-semibold text-[var(--primary)] dark:bg-[var(--primary)]/20 dark:text-[var(--primary-light)]"
                     )}
                   >
