@@ -48,6 +48,9 @@ export default function HomePage() {
             />
             {/* Breathtaking left-to-right dark gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--surface)]/95 via-[var(--surface)]/80 to-[var(--surface)]/20 dark:from-[#020617]/95 dark:via-[#020617]/80 dark:to-transparent" />
+            
+            {/* Cool Live Cloud Pattern Animation */}
+            <div className="clouds-bg opacity-70"></div>
           </div>
           
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
