@@ -102,7 +102,7 @@ export function LanguageSwitcher() {
       
       <Script
         src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-        strategy="lazyOnload"
+        strategy="afterInteractive"
       />
       
       <button
@@ -118,7 +118,7 @@ export function LanguageSwitcher() {
       </button>
 
       {isOpen && (
-        <div className="fixed left-4 right-4 top-[80px] sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-64 origin-top-right overflow-hidden rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-[0_8px_40px_rgba(0,0,0,0.15)] backdrop-blur-2xl dark:shadow-[0_8px_40px_rgba(0,0,0,0.5)] z-[100] flex flex-col max-h-[70vh] sm:max-h-[400px] animate-fade-in notranslate" translate="no">
+        <div className="fixed left-1/2 top-[80px] -translate-x-1/2 w-[calc(100vw-32px)] max-w-[320px] sm:absolute sm:left-auto sm:right-0 sm:-translate-x-0 sm:top-full sm:mt-2 sm:w-64 origin-top-right overflow-hidden rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-[0_8px_40px_rgba(0,0,0,0.15)] backdrop-blur-2xl dark:shadow-[0_8px_40px_rgba(0,0,0,0.5)] z-[100] flex flex-col max-h-[70vh] sm:max-h-[400px] animate-fade-in notranslate" translate="no">
           <div className="p-3 border-b border-[var(--outline)]">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--on-surface-muted)]" />

@@ -88,57 +88,30 @@ async function seedUsers() {
   for (const user of demoUsers) {
     console.log(`Processing ${user.email}...`);
     
-    // Check if user already exists
-    const { data: existingUsers, error: listError } = await supabase.auth.admin.listUsers();
-    if (listError) {
-      console.error(`Error listing users: ${listError.message}`);
-      continue;
-    }
-    
-    const existingUser = existingUsers.users.find(u => u.email === user.email);
-    let userId = existingUser ? existingUser.id : null;
+    let userId = null;
 
-    if (!existingUser) {
-      // Create user
-      const { data: newUser, error: createError } = await supabase.auth.admin.createUser({
-        email: user.email,
-        password: DEMO_PASSWORD,
-        email_confirm: true,
-        user_metadata: {
-          name: user.name,
-          username: user.username,
-          role: user.role,
-          department: user.department,
-          status: user.status
-        }
-      });
-
-      if (createError) {
-        console.error(`Failed to create ${user.email}: ${createError.message}`);
-        continue;
+    // Create user
+    const { data: newUser, error: createError } = await supabase.auth.admin.createUser({
+      email: user.email,
+      password: DEMO_PASSWORD,
+      email_confirm: true,
+      user_metadata: {
+        name: user.name,
+        username: user.username,
+        role: user.role,
+        department: user.department,
+        status: user.status
       }
+    });
+
+    if (createError) {
+      console.error(`Failed to create ${user.email}: ${createError.message}`);
+      // Maybe user exists, but since we can't list them, we'll just ignore for now.
+    } else {
       userId = newUser.user.id;
       console.log(`Created ${user.email} (ID: ${userId})`);
-    } else {
-      console.log(`User ${user.email} already exists. Updating password and metadata...`);
-      // Update password and metadata to ensure consistency
-      const { error: updateError } = await supabase.auth.admin.updateUserById(userId, {
-        password: DEMO_PASSWORD,
-        user_metadata: {
-          name: user.name,
-          username: user.username,
-          role: user.role,
-          department: user.department,
-          status: user.status
-        }
-      });
-      if (updateError) {
-        console.error(`Failed to update ${user.email}: ${updateError.message}`);
-      }
     }
 
-    // Force update the public.users record because the trigger might default to 'pending'
-    // or if the record already existed
     if (userId) {
       const { error: dbUpdateError } = await supabase
         .from('users')
