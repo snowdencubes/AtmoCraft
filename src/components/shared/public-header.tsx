@@ -48,7 +48,7 @@ export function PublicHeader() {
           }`}
         >
           {/* Logo Area */}
-          <Link href="/" className="group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl p-1 notranslate translate='no'">
+          <Link href="/" className="group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl p-1 notranslate" translate="no">
             <Logo className="h-10 w-10 sm:h-14 sm:w-14 transition-transform duration-300 group-hover:scale-105" />
             <div className="flex flex-col justify-center">
               <h1 className="font-heading text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent flex items-center gap-1">

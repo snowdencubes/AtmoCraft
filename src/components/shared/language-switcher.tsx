@@ -120,7 +120,7 @@ export function LanguageSwitcher() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-[calc(100vw-32px)] max-w-xs sm:w-64 origin-top-right overflow-hidden rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-[0_8px_40px_rgba(0,0,0,0.15)] backdrop-blur-2xl dark:shadow-[0_8px_40px_rgba(0,0,0,0.5)] z-[100] flex flex-col max-h-[70vh] sm:max-h-[400px] animate-fade-in notranslate translate="no">
+        <div className="absolute right-0 top-full mt-2 w-[calc(100vw-32px)] max-w-xs sm:w-64 origin-top-right overflow-hidden rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-[0_8px_40px_rgba(0,0,0,0.15)] backdrop-blur-2xl dark:shadow-[0_8px_40px_rgba(0,0,0,0.5)] z-[100] flex flex-col max-h-[70vh] sm:max-h-[400px] animate-fade-in notranslate" translate="no">
           <div className="p-3 border-b border-[var(--outline)]">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--on-surface-muted)]" />
