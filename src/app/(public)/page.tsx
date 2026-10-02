@@ -159,6 +159,127 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Data Sections (Announcements & Certifications) */}
+        <section className="bg-[var(--surface-raised)] py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-12 lg:grid-cols-2">
+              {/* Announcements */}
+              <div className="rounded-3xl border border-[var(--outline)] bg-[var(--surface-card)] p-8 shadow-sm">
+                <h2 className="mb-8 flex items-center gap-3 font-heading text-2xl font-bold text-[var(--on-surface)]">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--primary)]/10 text-[var(--primary)]">
+                    <BookOpen className="h-4 w-4" />
+                  </span>
+                  Latest Circulars
+                </h2>
+                <div className="flex flex-col gap-4">
+                  {loading ? (
+                    Array(3).fill(0).map((_, i) => <SkeletonLine key={i} className="h-24 w-full rounded-xl" />)
+                  ) : (
+                    announcements.map((ann) => (
+                      <div key={ann.id} className="group rounded-2xl border border-[var(--outline)] bg-[var(--surface)] p-5 transition-all hover:border-[var(--primary)]/30 hover:shadow-md">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className={cn(
+                            "rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider",
+                            ann.type === 'notification' && "bg-[var(--secondary)]/15 text-[var(--secondary)]",
+                            ann.type === 'announcement' && "bg-[var(--primary)]/15 text-[var(--primary)]",
+                            ann.type === 'achievement' && "bg-[var(--success)]/15 text-[var(--success)]",
+                            ann.type === 'new-content' && "bg-[var(--accent)]/15 text-[var(--accent)]",
+                          )}>
+                            {ann.type}
+                          </span>
+                          <span className="text-xs font-semibold text-[var(--on-surface-muted)]">
+                            {new Date(ann.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
+                          </span>
+                        </div>
+                        <h4 className="font-semibold text-[var(--on-surface)] leading-tight group-hover:text-[var(--primary)] transition-colors">{ann.title}</h4>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+
+              {/* Certifications */}
+              <div className="rounded-3xl border border-[var(--outline)] bg-[var(--surface-card)] p-8 shadow-sm">
+                <h2 className="mb-8 flex items-center gap-3 font-heading text-2xl font-bold text-[var(--on-surface)]">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
+                    <Award className="h-4 w-4" />
+                  </span>
+                  Recent Certifications
+                </h2>
+                <div className="flex flex-col gap-4">
+                  {loading ? (
+                    Array(3).fill(0).map((_, i) => <SkeletonLine key={i} className="h-20 w-full rounded-xl" />)
+                  ) : (
+                    certifications.map((cert) => (
+                      <div key={cert.id} className="flex items-center gap-5 rounded-2xl border border-[var(--outline)] bg-[var(--surface)] p-5 transition-all hover:border-[var(--accent)]/30 hover:shadow-md">
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--success)]/10 text-[var(--success)]">
+                          <Award className="h-6 w-6" />
+                        </div>
+                        <div>
+                          <p className="font-bold text-[var(--on-surface)]">{cert.userName}</p>
+                          <p className="mt-1 text-sm font-medium text-[var(--on-surface-muted)]">Earned: <span className="text-[var(--on-surface)]">{cert.courseName}</span></p>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* New Courses */}
+        <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+          <div className="mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+            <div className="max-w-2xl">
+              <h2 className="font-heading text-3xl font-extrabold text-[var(--on-surface)] tracking-tight">Newly Added Content</h2>
+              <p className="mt-3 text-lg text-[var(--on-surface-muted)]">Explore the latest training modules curated by IMD experts.</p>
+            </div>
+            <Link href="/courses" className="inline-flex items-center gap-2 text-sm font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors">
+              View All Courses <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          
+          <div className="grid gap-8 md:grid-cols-3">
+            {loading ? (
+              Array(3).fill(0).map((_, i) => <SkeletonCard key={i} />)
+            ) : (
+              courses.map((course) => (
+                <div key={course.id} className="group flex flex-col overflow-hidden rounded-3xl border border-[var(--outline)] bg-[var(--surface-card)] shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-[var(--primary)]/30">
+                  <div className="relative h-52 w-full bg-gradient-to-br from-[var(--primary-light)]/20 to-[var(--primary)]/5 p-6 overflow-hidden">
+                    <div className="absolute right-4 top-4 rounded-full bg-[var(--glass-bg)] px-3 py-1 text-xs font-bold text-[var(--primary)] backdrop-blur-md shadow-sm border border-[var(--glass-border)] z-10">
+                      {course.level}
+                    </div>
+                    {course.imageUrl ? (
+                      <Image 
+                        src={course.imageUrl} 
+                        alt={course.title} 
+                        fill 
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center">
+                        <BookOpen className="h-12 w-12 text-[var(--primary)]/30 group-hover:text-[var(--primary)]/50 transition-colors" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col p-6 sm:p-8">
+                    <div className="mb-3 text-xs font-bold uppercase tracking-widest text-[var(--secondary)]">{course.subject}</div>
+                    <h3 className="font-heading text-xl font-bold leading-snug line-clamp-2 text-[var(--on-surface)] group-hover:text-[var(--primary)] transition-colors">{course.title}</h3>
+                    <p className="mt-3 text-sm font-medium text-[var(--on-surface-muted)] flex-1">By {course.trainerName}</p>
+                    <div className="mt-6 flex items-center justify-between pt-6 border-t border-[var(--outline)]">
+                      <span className="text-sm font-bold text-[var(--on-surface-muted)]">{course.duration}</span>
+                      <Link href={`/login`} className="text-sm font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] flex items-center gap-1">
+                        Explore <ArrowRight className="h-3 w-3" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
+
         {/* Dynamic CTA Section */}
         <section className="relative overflow-hidden bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] py-24 sm:py-32">
           {/* Organic Wave Divider Top */}
